@@ -582,7 +582,7 @@ const heUrl=u=>'https://translate.google.com/translate?sl=en&tl=iw&u='+encodeURI
 function podHtml(p){
   const sp=spotifyUrl(p), heTr=p.tr&&p.l==='EN'?heUrl(p.tr[1]):null;
   return `<div class="pod">
-    <div class="hd"><span class="lang">${p.l}</span><div class="ttl" dir="auto">${esc(p.show)} · <span class="ep">${esc(p.ep)}</span></div></div>
+    <div class="hd"><span class="lang">${p.l}</span><div class="ttl"><bdi>${esc(p.show)}</bdi> · <span class="ep"><bdi>${esc(p.ep)}</bdi></span></div></div>
     <div class="m">${p.len?`<span>⏱ <span dir="auto">${esc(p.len)}</span></span>`:''}${p.at?`<span class="chip star">מאיפה: ${esc(p.at)}</span>`:''}</div>
     <p>${esc(p.sum)}</p>
     <div class="links">${p.listen.map(([lb,u])=>`<a class="lk pri" href="${esc(u)}" target="_blank" rel="noopener">${I.play}<span dir="auto">${esc(lb)}</span></a>`).join('')}${sp?`<a class="lk pri" href="${esc(sp)}" target="_blank" rel="noopener">${I.play}<span dir="ltr">Spotify</span></a>`:''}${p.tr?`<a class="lk" href="${esc(p.tr[1])}" target="_blank" rel="noopener">${I.doc}תמלול ${esc(p.tr[0])}</a>`:''}${heTr?`<a class="lk" href="${esc(heTr)}" target="_blank" rel="noopener">${I.doc}תמלול בעברית</a>`:''}</div>
