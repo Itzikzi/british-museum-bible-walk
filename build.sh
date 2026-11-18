@@ -6,7 +6,7 @@ set -e
 cd "$(dirname "$0")"
 {
   printf '%s\n' '<!doctype html>' '<html lang="he" dir="rtl">' '<head>' \
-    '<meta charset="utf-8">' \
+    '<meta charset="utf-8">' '<meta name="robots" content="noindex">' \
     '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">' \
     '<link rel="manifest" href="manifest.webmanifest">' \
     '<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">' \

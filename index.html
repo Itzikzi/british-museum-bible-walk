@@ -2,6 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -120,7 +121,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 
 .stop .row2{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:.84rem;color:var(--ink3)}
 .stop .peek{font-size:.88rem;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .prog{flex:none;font-size:.8rem;font-weight:700;color:var(--ink3);font-variant-numeric:tabular-nums}
-.chip{display:inline-flex;align-items:center;gap:4px;padding:1px 9px;border-radius:999px;font-size:.78rem;font-weight:700;line-height:1.6;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;font-size:.78rem;font-weight:700;line-height:1.4;white-space:nowrap}
 .chip.ok{background:var(--ok-soft);color:var(--ok)}
 .chip.bad{background:var(--warn-soft);color:var(--carnelian)}
 .chip.info{background:var(--lapis-soft);color:var(--lapis)}
@@ -167,6 +168,8 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 
 .item .hd .t{flex:1;min-width:0}
 .item .sub{font-size:.84rem;color:var(--ink3);display:flex;flex-wrap:wrap;gap:4px 8px;margin-top:2px}
 .item p{margin:0;color:var(--ink);font-size:.97rem}
+.note{display:flex;gap:8px;align-items:flex-start;font-size:.9rem;padding:8px 10px;border-radius:12px;background:var(--warn-soft);color:var(--ink)}
+.note svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--carnelian)}
 .bible{font-size:.9rem;color:var(--ink2)}
 .bible b{color:var(--gold);font-weight:800}
 .links{display:flex;flex-wrap:wrap;gap:6px}
@@ -176,7 +179,9 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 
 :root[data-theme="dark"] .lk.pri{color:#0f1426}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lk.pri{color:#0f1426}}
 
-.pod{border-radius:var(--r-md);padding:12px 14px;display:flex;flex-direction:column;gap:6px;background:var(--glass);min-width:0;overflow:hidden}
+.item .pods{border-top:1px solid var(--line);padding-top:10px;margin-top:2px;display:flex;flex-direction:column;gap:8px}
+.item .pods .h4{margin:0}
+.pod{border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;background:var(--room-ctx);min-width:0;overflow:hidden}
 .pod .hd{display:flex;gap:8px;align-items:flex-start}
 .lang{flex:none;font-size:.72rem;font-weight:800;padding:2px 7px;border-radius:6px;background:var(--ink);color:var(--bg);margin-top:3px;letter-spacing:.04em}
 .pod .ttl{font-weight:800;min-width:0;line-height:1.35}
@@ -293,42 +298,44 @@ const W='https://en.wikipedia.org/wiki/';
 
 const ITEMS={
 rosetta:{t:`אבן רוזטה`,sub:[`196 לפנה"ס`,`EA 24`],star:'E',p:`צו של תלמי החמישי בשלושה כתבים: הירוגליפים, דמוטית ויוונית. ההקשר: מצרים התלמית, "מלך הנגב", ותרגום השבעים.`,b:`דניאל יא`,l:[['BM',BM+'Y_EA24'],['Wikipedia',W+'Rosetta_Stone']]},
-ramesses:{t:`פסל רעמסס השני`,sub:[`כ-1250 לפנה"ס`],p:`תעמולה מלכותית מצרית בשיאה. רעמסס הוא אביו של מרנפתח, שבמצבתו מופיע השם "ישראל" (המצבה עצמה בקהיר).`,b:`רקע לשמות א 11`,l:[['Wikipedia',W+'Younger_Memnon']]},
-obelisk:{t:`האובליסק השחור של שלמנאסר השלישי`,sub:[`כ-825 לפנה"ס`,`1848,1104.1`],p:`"יהוא בן עמרי" משתחווה למלך אשור. לפי המוזיאון זו התמונה המוקדמת ביותר ששרדה של ישראלי (כ-841 לפנה"ס). "בית עמרי" הוא הכינוי האשורי לממלכת ישראל.`,b:`מל"ב ט–י`,l:[['BM',BM+'W_1848-1104-1'],['Wikipedia',W+'Black_Obelisk_of_Shalmaneser_III']]},
-balawat:{t:`שערי בלוואת`,sub:[`המאה ה-9 לפנה"ס`],p:`רצועות ברונזה משערי שלמנאסר השלישי. באחת מהן צור שולחת מס בסירות: רקע לאחאב ואיזבל, בת מלך צידונים.`,b:`מל"א טז 31`,l:[['Wikipedia',W+'Balawat_Gates']]},
+ramesses:{t:`פסל רעמסס השני`,sub:[`כ-1250 לפנה"ס`,`EA 19`],p:`תעמולה מלכותית מצרית בשיאה. רעמסס הוא אביו של מרנפתח, שבמצבתו מופיע השם "ישראל" (המצבה עצמה בקהיר).`,b:`רקע לשמות א 11`,l:[['BM',BM+'Y_EA19'],['Wikipedia',W+'Younger_Memnon']]},
+obelisk:{t:`האובליסק השחור של שלמנאסר השלישי`,sub:[`6a`,`כ-825 לפנה"ס`,`1848,1104.1`],p:`"יהוא בן עמרי" משתחווה למלך אשור. לפי המוזיאון זו התמונה המוקדמת ביותר ששרדה של ישראלי (כ-841 לפנה"ס). "בית עמרי" הוא הכינוי האשורי לממלכת ישראל.`,b:`מל"ב ט–י`,l:[['BM',BM+'W_1848-1104-1'],['Wikipedia',W+'Black_Obelisk_of_Shalmaneser_III']]},
+balawat:{t:`שערי בלוואת`,sub:[`6b`,`המאה ה-9 לפנה"ס`],p:`רצועות ברונזה משערי שלמנאסר השלישי. באחת מהן צור שולחת מס בסירות: רקע לאחאב ואיזבל, בת מלך צידונים.`,b:`מל"א טז 31`,l:[['Wikipedia',W+'Balawat_Gates']]},
+kurkh:{t:`מונוליט כורח: אחאב בקרב קרקר`,sub:[`6a`,`853 לפנה"ס`,`1863,0619.2`],p:`מצבת שלמנאסר השלישי שמונה את אויביו בקרב קרקר, ובהם "אחאב הישראלי" עם 2,000 מרכבות. האזכור החוץ-מקראי הראשון של מלך ישראל.`,b:`מל"א טז–כב`,l:[['BM',BM+'W_1863-0619-2'],['Wikipedia',W+'Kurkh_Monoliths']]},
 lamassu:{t:`למסו של אשורנצירפל השני`,sub:[`חדר 6a`,`כ-865 לפנה"ס`],p:`שומרי השער המכונפים מארמון נמרוד: אריה בעל ראש אדם.`,l:[['BM: אריה',BM+'W_1851-0902-508'],['Wikipedia',W+'Lamassu']]},
 nimrud:{t:`תבליטי נמרוד`,sub:[`חדרים 7–8`,`המאה ה-9 לפנה"ס`],p:`תבליטים מארמון אשורנצירפל השני בנמרוד (כלח): מלחמה, ציד וטקסים. חדר 7 פתוח רק 11:00–15:00; חדר 8 פתוח כל היום.`,b:`בראשית י 11`,l:[]},
 nineveh:{t:`תבליטי נינוה`,sub:[`חדר 9`,`המאה ה-7 לפנה"ס`],p:`תבליטים מארמון סנחריב בנינוה, העיר שאליה נשלח יונה. הקדמה טובה ללכיש.`,b:`יונה א 2; מל"ב יט 36`,l:[]},
-lachish:{t:`תבליטי לכיש`,sub:[`10b`,`700–692 לפנה"ס`,`1856,0909.14`],p:`לוחות מחדר XXXVI בארמון סנחריב בנינוה: סוללת המצור, הקלעים, הגירוש וההוצאה להורג. מעל המלך כתוב ששלל לכיש עובר לפניו.`,b:`מל"ב יח 13–17; יט 8; דה"ב לב 9; ישעיהו לו 1–2; מיכה א 13`,l:[['BM: ההתקפה',BM+'W_1856-0909-14'],['BM: סנחריב על כסאו',BM+'W_1856-0909-14_7'],['Wikipedia',W+'Siege_of_Lachish']]},
-lionhunt:{t:`ציד האריות של אשורבניפל`,sub:[`10a`,`645–635 לפנה"ס`],star:'F',p:`שיא האמנות האשורית. אשורבניפל ("אסנפר", לפי הזיהוי המקובל) הוא גם בעל הספרייה שבה נמצא לוח המבול.`,b:`עזרא ד 10`,l:[['BM',BM+'W_1856-0909-48_8'],['Wikipedia',W+'Lion_Hunt_of_Ashurbanipal']]},
+lachish:{t:`תבליטי לכיש`,sub:[`10a, אזור A`,`700–692 לפנה"ס`,`1856,0909.14`],p:`לוחות מחדר XXXVI בארמון סנחריב בנינוה: סוללת המצור, הקלעים, הגירוש וההוצאה להורג. מעל המלך כתוב ששלל לכיש עובר לפניו.`,b:`מל"ב יח 13–17; יט 8; דה"ב לב 9; ישעיהו לו 1–2; מיכה א 13`,l:[['BM: ההתקפה',BM+'W_1856-0909-14'],['BM: סנחריב על כסאו',BM+'W_1856-0909-14_7'],['Wikipedia',W+'Siege_of_Lachish']]},
+lionhunt:{t:`ציד האריות של אשורבניפל`,sub:[`10a, אזור C`,`645–635 לפנה"ס`],star:'F',p:`שיא האמנות האשורית. אשורבניפל ("אסנפר", לפי הזיהוי המקובל) הוא גם בעל הספרייה שבה נמצא לוח המבול.`,b:`עזרא ד 10`,l:[['BM: לוח מאותה סדרה (ציד צבאים)',BM+'W_1856-0909-48_8'],['Wikipedia',W+'Lion_Hunt_of_Ashurbanipal']]},
 khorsabad:{t:`שוורי חורסבאד של סרגון השני`,sub:[`10c`,`כ-710 לפנה"ס`],p:`שוורים מכונפים מבירת סרגון. סרגון מוזכר בשמו רק בישעיהו כ 1; הוא השלים את כיבוש שומרון.`,b:`ישעיהו כ 1; מל"ב יז 6`,l:[['BM: שור',BM+'W_1850-1228-4'],['Wikipedia',W+'Lamassu']]},
 mausoleum:{t:`המאוזוליאון של הליקרנסוס`,sub:[`חדר 21`],p:`פסלים מקבר מאוסולוס, מושל פרסי באסיה הקטנה. אמנות בשולי האימפריה הפרסית.`,l:[]},
 alexander:{t:`עולמו של אלכסנדר`,sub:[`חדר 22`],p:`אלכסנדר ויורשיו, "התיש" בחזון דניאל. מטבע של אנטיוכוס הרביעי: לא אומת שמוצג.`,warn:1,b:`דניאל ח 5–8, 21; מקבים א א 1–9`,l:[['Antiochus IV',W+'Antiochus_IV_Epiphanes']]},
-ephesus:{t:`תוף עמוד ממקדש ארטמיס באפסוס`,sub:[`חדר 22`],warn:1,p:`"גדולה ארטמיס של האפסים": המהומה נגד פאולוס.`,b:`מה"ש יט 28, 34`,l:[['BM',BM+'G_1872-0803-9']]},
+ephesus:{t:`תוף עמוד ממקדש ארטמיס באפסוס`,sub:[`חדר 22`],p:`"גדולה ארטמיס של האפסים": המהומה נגד פאולוס.`,b:`מה"ש יט 28, 34`,l:[['BM',BM+'G_1872-0803-9']]},
 nereid:{t:`אנדרטת הנראידות`,sub:[`חדר 17`],p:`קבר בצורת מקדש יווני מקסנתוס שבליקיה, לשליט מקומי תחת פרס.`,l:[]},
 parthenon:{t:`פסלי הפרתנון`,sub:[`חדר 18`],star:'G',p:`אתונה הקלאסית. פאולוס נאם באתונה בגבעת אראופגוס, למרגלות האקרופוליס.`,b:`מה"ש יז 16–34`,l:[]},
 levant:{t:`פיניקיה, כנען ופלשת`,sub:[`חדרים 58–59`],warn:1,p:`גלריית הלבנט הקדום. המוזיאון הוא המוזיאון העיקרי לממצאי לכיש.`,l:[]},
-ivories:{t:`שנהבי נמרוד`,sub:[`חדרים 57–58`],warn:1,p:`עבודה פיניקית שנמצאה בנמרוד. השוו "בית השן" של אחאב ו"מטות שן" בעמוס.`,b:`מל"א כב 39; עמוס ו 4`,l:[['Wikipedia',W+'Nimrud_ivories']]},
-lletters:{t:`מכתבי לכיש`,sub:[`חדר 57`,`כ-588–586 לפנה"ס`],p:`חרסים בעברית מימי המצור הבבלי. מכתב 4: "לא נראה את עזקה". מכתב 3 מזכיר "הנבא".`,b:`ירמיהו לד 7`,l:[['Wikipedia',W+'Lachish_letters']]},
+ivories:{t:`שנהבי נמרוד`,sub:[`חדר 57, ויטרינה 12`],p:`עבודה פיניקית שנמצאה בנמרוד. השוו "בית השן" של אחאב ו"מטות שן" בעמוס.`,b:`מל"א כב 39; עמוס ו 4`,l:[['Wikipedia',W+'Nimrud_ivories']]},
+lletters:{t:`מכתבי לכיש`,sub:[`חדר 57, ויטרינה 10`,`כ-588–586 לפנה"ס`],note:`מוצגים מכתבים I, II, V ו-XVII. מכתב 4 ("לא נראה את עזקה") ומכתב 3 ("הנבא") אינם מוצגים כאן.`,p:`חרסים בעברית מימי המצור הבבלי: התכתבות של מפקד במוצב עם מפקד לכיש.`,b:`ירמיהו לד 7`,l:[['Wikipedia',W+'Lachish_letters']]},
 steward:{t:`"אשר על הבית"`,sub:[`חדר 57`,`סוף המאה ה-8 לפנה"ס`,`1871,1107.1`],p:`משקוף קבר מכפר השילוח. מזוהה בזהירות עם שבנא מימי חזקיהו.`,b:`ישעיהו כב 15–16`,l:[['BM',BM+'W_1871-1107-1'],['Wikipedia',W+'Royal_Steward_inscription']]},
-ram:{t:`האיל בסבך`,sub:[`כ-2600–2400 לפנה"ס`],p:`את השם "Ram in a Thicket" נתן וולי בהשראת עקדת יצחק, אבל אין קשר ישיר.`,b:`בראשית כב 13`,l:[['BM',BM+'W_1929-1017-1']]},
-standard:{t:`דגל אור`,sub:[`כ-2500 לפנה"ס`],p:`צד "מלחמה" וצד "שלום" מלפיס לזולי, צדף ואבן גיר אדומה. "אור כשדים", עירו של אברהם.`,b:`בראשית יא 28, 31`,l:[['BM',BM+'W_1928-1010-3']]},
-game:{t:`המשחק המלכותי של אור`,sub:[`כ-2500 לפנה"ס`],p:`לוח משחק שחוקיו שוחזרו מלוח בכתב יתדות מאוחר.`,l:[['BM',BM+'W_1928-1009-379-h']]},
-flood:{t:`לוח המבול (גילגמש XI)`,sub:[`K.3375`,`המאה ה-7 לפנה"ס`],p:`אותנפישתים בונה ספינה ושולח יונה, סנונית ועורב. ג'ורג' סמית פענח ב-1872. אטרחסיס הוא הגרסה הקדומה יותר.`,b:`בראשית ו–ט, במיוחד ח 6–12`,l:[['BM',BM+'W_K-3375'],['Gilgamesh flood myth',W+'Gilgamesh_flood_myth'],['Atra-Hasis',W+'Atra-Hasis']]},
-taylor:{t:`מנסרת טיילור`,sub:[`691 לפנה"ס`,`1855,1003.1`],warn:1,p:`שמונת מסעות סנחריב: 46 ערים ביהודה נכבשו, וחזקיהו ננעל בירושלים "כציפור בכלוב". הטקסט אינו טוען שירושלים נכבשה.`,b:`מל"ב יח 13–16; יט 35–36; ישעיהו לו–לז`,l:[['BM',BM+'W_1855-1003-1'],['Wikipedia',W+'Sennacherib%27s_Annals']]},
-chronicle:{t:`כרוניקת נבוכדנאצר (ABC 5)`,sub:[`BM 21946`],p:`לוח קטן (כ-8 ס"מ) שמתעד את כרכמיש ואת כיבוש "עיר יהודה" ב-2 באדר, 15/16 במרץ 597 לפנה"ס.`,b:`מל"ב כד 10–17; ירמיהו מו 2`,l:[['Wikipedia',W+'Nebuchadnezzar_Chronicle'],['CoJS','https://cojs.org/the_babylonian_chronicle_-chronicle_5-_nebuchadnezzar_besieges_jerusalem-_597_bce/']]},
-belshazzar:{t:`נבונאיד ובלשאצר`,sub:[`BM 35382`,`BM 91128`],warn:1,p:`הגליל מתפלל לשלום "בל-שר-אוצר, בני הבכור"; הכרוניקה מתארת את נפילת בבל ב-539. מסביר את "השליש במלכות".`,b:`דניאל ה 7, 16, 29`,l:[['Nabonidus Chronicle',W+'Nabonidus_Chronicle'],['Cylinders',W+'Cylinders_of_Nabonidus']]},
+ram:{t:`האיל בסבך`,sub:[`כ-2600–2400 לפנה"ס`],off:1,note:`לפי אתר המוזיאון הפריט לא מוצג כרגע. אין תחליף בחדר.`,p:`את השם "Ram in a Thicket" נתן וולי בהשראת עקדת יצחק, אבל אין קשר ישיר.`,b:`בראשית כב 13`,l:[['BM',BM+'W_1929-1017-1']]},
+standard:{t:`דגל אור`,sub:[`ויטרינה 17`,`כ-2500 לפנה"ס`],p:`צד "מלחמה" וצד "שלום" מלפיס לזולי, צדף ואבן גיר אדומה. "אור כשדים", עירו של אברהם.`,b:`בראשית יא 28, 31`,l:[['BM',BM+'W_1928-1010-3']]},
+game:{t:`המשחק המלכותי של אור`,sub:[`ויטרינה 16`,`כ-2500 לפנה"ס`],p:`לוח משחק שחוקיו שוחזרו מלוח בכתב יתדות מאוחר.`,l:[['BM',BM+'W_1928-1009-378']]},
+flood:{t:`לוח המבול (גילגמש XI)`,sub:[`ויטרינה 16`,`K.3375`,`המאה ה-7 לפנה"ס`],p:`אותנפישתים בונה ספינה ושולח יונה, סנונית ועורב. ג'ורג' סמית פענח ב-1872. אטרחסיס הוא הגרסה הקדומה יותר.`,b:`בראשית ו–ט, במיוחד ח 6–12`,l:[['BM',BM+'W_K-3375'],['Gilgamesh flood myth',W+'Gilgamesh_flood_myth'],['Atra-Hasis',W+'Atra-Hasis']]},
+taylor:{t:`מנסרת טיילור`,sub:[`ויטרינה 3`,`691 לפנה"ס`,`1855,1003.1`],p:`שמונת מסעות סנחריב: 46 ערים ביהודה נכבשו, וחזקיהו ננעל בירושלים "כציפור בכלוב". הטקסט אינו טוען שירושלים נכבשה.`,b:`מל"ב יח 13–16; יט 35–36; ישעיהו לו–לז`,l:[['BM',BM+'W_1855-1003-1'],['Wikipedia',W+'Sennacherib%27s_Annals']]},
+chronicle:{t:`כרוניקת נבוכדנאצר (ABC 5)`,sub:[`ויטרינה 7`,`BM 21946`],p:`לוח קטן (כ-8 ס"מ) שמתעד את כרכמיש ואת כיבוש "עיר יהודה" ב-2 באדר, 15/16 במרץ 597 לפנה"ס.`,b:`מל"ב כד 10–17; ירמיהו מו 2`,l:[['BM',BM+'W_1896-0409-51'],['Wikipedia',W+'Nebuchadnezzar_Chronicle'],['CoJS','https://cojs.org/the_babylonian_chronicle_-chronicle_5-_nebuchadnezzar_besieges_jerusalem-_597_bce/']]},
+belshazzar:{t:`כרוניקת נבונאיד: נפילת בבל`,sub:[`ויטרינה 7`,`BM 35382`],note:`גליל נבונאיד (BM 91128), שמזכיר את בלשאצר בשמו, לא מוצג כרגע. הכרוניקה המוצגת מספרת על נפילת בבל ועל שהות נבונאיד בתימא, כשבנו מנהל את העניינים.`,p:`הכרוניקה מתארת את נפילת בבל לכורש ב-539. נבונאיד ישב בתימא ובנו בלשאצר ניהל את בבל: זה מסביר מדוע דניאל הוא רק "השליש במלכות".`,b:`דניאל ה 7, 16, 29`,l:[['BM',BM+'W_Sp-II-964'],['Nabonidus Chronicle',W+'Nabonidus_Chronicle'],['Cylinders',W+'Cylinders_of_Nabonidus']]},
+nebo:{t:`לוח נבו-שר-סכים`,sub:[`ויטרינה 7`,`595 לפנה"ס`,`1920,1213.81`],p:`קבלה בבלית קטנה שמזכירה פקיד בשם נבו-שר-סכים, "רב סריס" של נבוכדנאצר, ככל הנראה אותו שר שנכח בכיבוש ירושלים.`,b:`ירמיהו לט 3`,l:[['BM',BM+'W_1920-1213-81'],['Wikipedia',W+'Nebo-Sarsekim_Tablet']]},
 cyrus:{t:`גליל כורש`,sub:[`אחרי 539 לפנה"ס`,`1880,0617.1941`],p:`כורש מתאר כיבוש של בבל בלי קרב והחזרת גולים ואלים. יהודה אינה מוזכרת; זו תעמולה בבלית, לא "מגילת זכויות אדם".`,b:`עזרא א 1–4; דה"ב לו 22–23; ישעיהו מד 28; מה 1`,l:[['BM',BM+'W_1880-0617-1941'],['Wikipedia',W+'Cyrus_Cylinder']]},
 oxus:{t:`אוצר אוקסוס, פרספוליס וחותם דריווש`,sub:[`חדר 52`],star:'J',p:`עולמם של אסתר ונחמיה. דריווש אישר את בניית הבית השני.`,b:`אסתר א 6–7; נחמיה א 11; עזרא ו`,l:[['BM: מרכבה',BM+'W_1897-1231-7'],['BM: פקיד פרסי',BM+'W_1861-0524-6'],['BM: חותם דריווש',BM+'W_1835-0630-1']]},
-hinton:{t:`מדליון הינטון סנט מרי`,sub:[`המאה ה-4`],p:`ראש עם סמל כי-רו: אחד הדימויים הקדומים של ישו, מבריטניה הרומית.`,l:[['Wikipedia',W+'Hinton_St_Mary_Mosaic']]},
-money:{t:`מטבעות: מצור ועד בר כוכבא`,sub:[`חדר 68`],p:`שקלי צור (שולחני הכספים), מטבע אגריפס הראשון, שקל המרד הגדול, ססטרטיוס "IVDAEA CAPTA" של אספסיאנוס ומטבע בר כוכבא. "דינר המס": לא אומת.`,b:`מתי כא 12; כב 19–21`,l:[['עמוד הגלריה','https://www.britishmuseum.org/collection/galleries/money'],['PDF טקסט מוגדל','https://www.britishmuseum.org/sites/default/files/2021-05/Money_Gallery_LPG_2020_Room_68.pdf']]},
+hinton:{t:`מדליון הינטון סנט מרי`,sub:[`המאה ה-4`],p:`ראש עם סמל כי-רו: אחד הדימויים הקדומים של ישו, מבריטניה הרומית.`,l:[['BM',BM+'H_1965-0409-1'],['Wikipedia',W+'Hinton_St_Mary_Mosaic']]},
+money:{t:`מטבעות: מצור ועד בר כוכבא`,sub:[`חדר 68`,`שקלי צור: ויטרינה 5`],note:`שקלי צור מוצגים. מטבעות "IVDAEA CAPTA" ובר כוכבא לא נמצאו בקטלוג כמוצגים. חלופה: שקל המרד הגדול (1875,0503.9) בחדר 70, ויטרינה 27.`,p:`שקלי צור, המטבע ששולחני הכספים במקדש החליפו. בהמשך האוסף: מטבעות מימי רומא ויהודה.`,b:`מתי כא 12; כב 19–21`,l:[['עמוד הגלריה','https://www.britishmuseum.org/collection/galleries/money'],['PDF טקסט מוגדל','https://www.britishmuseum.org/sites/default/files/2021-05/Money_Gallery_LPG_2020_Room_68.pdf']]},
 roman:{t:`האימפריה הרומית`,sub:[`חדר 70`],p:`פורטרטים של קיסרים, ביניהם אוגוסטוס, וגביע וורן. שער טיטוס נמצא ברומא; אבן פילטוס במוזיאון ישראל.`,b:`לוקס ב 1`,l:[]},
 mummies:{t:`מצרים: חיים ומוות, מומיות`,sub:[`חדרים 61–63`],p:`אסמים, חניטה ולבנים כרקע תרבותי בלבד לסיפורי יוסף והשעבוד. יציקה מקבר מרנפתח נמצאת במדרגות המזרחיות.`,b:`בראשית מא; נ; שמות ה`,l:[['Merneptah Stele',W+'Merneptah_Stele']]},
 holythorn:{t:`תשמיש הקודש של הקוץ הקדוש`,sub:[`חדר 2a`,`כ-1390`],star:'A',p:`שכיית חמדה מזהב ואבנים טובות שנבנתה סביב קוץ אחד מכתר הקוצים, לפי המסורת. סצנת יום הדין, מאוסף ואדסדון.`,b:`מתי כז 29; יוחנן יט 2`,l:[['Wikipedia',W+'Holy_Thorn_Reliquary']]},
-hoa:{t:`הואה הקאנאיי (Hoa Hakananai'a)`,sub:[`חדר 24`,`Rapa Nui`],star:'D',p:`פסל אבן ענק של אב קדמון מאי הפסחא. לא מקראי, אבל מהפריטים החשובים במוזיאון.`,l:[['Wikipedia',W+'Hoa_Hakananai%27a']]},
+hoa:{t:`הואה הקאנאיי (Hoa Hakananai'a)`,sub:[`חדר 24`,`Rapa Nui`],star:'D',p:`פסל אבן ענק של אב קדמון מאי הפסחא. לא מקראי, אבל מהפריטים החשובים במוזיאון.`,l:[['BM',BM+'E_Oc1869-1005-1'],['Wikipedia',W+'Hoa_Hakananai%27a']]},
 tang:{t:`פסלי הקבר משושלת טאנג`,sub:[`חדר 33`,`המאה ה-8`],star:'B',p:`פסלי קרמיקה מקבר של גנרל סיני: שומרים, סוסים ופקידים שליוו אותו לעולם הבא.`,l:[]},
 shiva:{t:`שיווה נטראג'ה, אדון הריקוד`,sub:[`חדר 33`,`דרום הודו`],star:'C',p:`פסל ברונזה של שיווה רוקד בתוך טבעת אש: בריאה והרס במעגל.`,l:[['Wikipedia',W+'Nataraja']]},
-lewis:{t:`כלי השחמט מלואיס`,sub:[`חדר 40`,`המאה ה-12`],star:'H',p:`ערכת השחמט המפורסמת בעולם, משנהב וולרוס, כנראה מנורווגיה. מלכים, מלכות, בישופים ולוחמים נושכי מגן.`,l:[['Wikipedia',W+'Lewis_chessmen']]},
+lewis:{t:`כלי השחמט מלואיס`,sub:[`חדר 40, ויטרינה 5`,`המאה ה-12`],note:`מוצגים רק חלק מהכלים.`,star:'H',p:`ערכת השחמט המפורסמת בעולם, משנהב וולרוס, כנראה מנורווגיה. מלכים, מלכות, בישופים ולוחמים נושכי מגן.`,l:[['Wikipedia',W+'Lewis_chessmen']]},
 astrolabe:{t:`אסטרולב`,sub:[`חדר 42`],star:'I',p:`כלי מדעי מהעולם האסלאמי למדידת גובה הכוכבים, השעה וכיוון התפילה.`,l:[['Wikipedia',W+'Astrolabe']]},
 portland:{t:`כד פורטלנד`,sub:[`חדר 70`,`כ-15 לפנה"ס – 25 לסה"נ`],star:'K',p:`כד זכוכית קמאו רומי מימי אוגוסטוס, ההשראה של וג'ווד. בן זמנו של ישו.`,l:[['Wikipedia',W+'Portland_Vase']]},
 enlight:{t:`Enlightenment ועותק מגע של אבן רוזטה`,sub:[`חדר 1`],p:`איך אספו וסיווגו את העולם במאה ה-18. אפשר לגעת בעותק של אבן רוזטה.`,l:[]}
@@ -338,34 +345,33 @@ const P=(l,show,ep,len,listen,tr,at,sum)=>({l,show,ep,len,listen,tr,at,sum});
 const BBC_T='http://www.bbc.co.uk/ahistoryoftheworld/about/transcripts/episode';
 const PODS={
 rosetta:[
- P('EN','100 Objects #33','The Rosetta Stone','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sbrz3']],['רשמי ⚠️',BBC_T+'33/'],'כל הפרק','מקגרגור מציג צו כוהנים בירוקרטי, וטוען שדווקא הבנאליות שלו הפכה אותו למפתח לפענוח. נוגע גם במאבק הבריטי-צרפתי על האבן.'),
+ P('EN','100 Objects #33','The Rosetta Stone','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sbrz3']],['רשמי',BBC_T+'33/'],'כל הפרק','מקגרגור מציג צו כוהנים בירוקרטי, וטוען שדווקא הבנאליות שלו הפכה אותו למפתח לפענוח. נוגע גם במאבק הבריטי-צרפתי על האבן.'),
  P('EN','In Our Time','The Rosetta Stone','47 דק\'',[['Podbay','https://podbay.fm/p/in-our-time/e/1613038500']],null,'','דיון אקדמי על הגילוי ב-1799, שלושת הכתבים, ותרומתם של יאנג ושמפוליון.'),
  P('HE','עושים היסטוריה #351','נפוליאון במזה"ת, חלק ה\' – אבן הרוזטה','50 דק\'',[['Spreaker','https://www.spreaker.com/episode/wsym-hystwryh-351-npwly-wn-bmzh-t-hlq-h-w-hrwn-bn-hrwzth--44475258']],null,'החצי השני','איך עבודות ביצור חשפו את האבן, שהפכה למורשת החשובה ביותר של המסע.'),
  P('HE','יחידים במינם #79–80','שמפוליון','',[['חלק א\'','https://niv-goldstein.com/2022/04/21/%D7%A4%D7%A8%D7%A7-%D7%9E%D7%A1%D7%A4%D7%A8-79-%D7%96%D7%90%D7%9F-%D7%A4%D7%A8%D7%A0%D7%A1%D7%95%D7%90%D7%94-%D7%A9%D7%9E%D7%A4%D7%95%D7%9C%D7%99%D7%95%D7%9F-%D7%94%D7%90%D7%99%D7%A9-%D7%A9%D7%A4/'],['חלק ב\' (YouTube)','https://www.youtube.com/watch?v=O62KvAXkSuA']],null,'','ביוגרפיה של מפענח ההירוגליפים, כולל המחלוקות סביב הפענוח.')],
-ramesses:[P('EN','100 Objects #20','Statue of Ramesses II','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qg5mk']],['רשמי ⚠️',BBC_T+'20/'],'כל הפרק','תעמולה מלכותית מצרית בשיאה. רקע למרנפתח, בנו ויורשו.')],
+ramesses:[P('EN','100 Objects #20','Statue of Ramesses II','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qg5mk']],['רשמי',BBC_T+'20/'],'כל הפרק','תעמולה מלכותית מצרית בשיאה. רקע למרנפתח, בנו ויורשו.')],
 obelisk:[
- P('HE','עושים תנ"ך','סדרת אחאב, איזבל ומרד יהוא (בעז סתוי) ⚠️','',[['דף התוכנית','https://podcastaddict.com/podcast/2032693']],null,'','הרקע המקראי לאחאב וליהוא.'),
- P('EN','Biblical Archaeology Today','Black Obelisk / King Jehu','',[['אינדקס ⚠️','https://www.listennotes.com/top-podcasts/black-obelisk/']],null,'','פרקים קצרים בגישה דתית, עם קריאה בטקסט האובליסק. לא מקור אקדמי.')],
+ P('HE','עושים תנ"ך','סדרת אחאב, איזבל ומרד יהוא (בעז סתוי) ⚠️','',[['דף התוכנית','https://podcastaddict.com/podcast/2032693']],null,'','הרקע המקראי לאחאב וליהוא.'),],
 lachish:[
  P('EN','100 Objects #21','Lachish Reliefs','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qmb8h']],['רשמי ✅','http://www.bbc.co.uk/programmes/articles/154mNjkBrC9vmm3J3xL1m8p/episode-transcript-episode-21-lachish-reliefs'],'אחרי כדקה','התבליטים כתעמולה ממלכתית שהראתה בארמון את מחיר המרד. המוקד בפליטים המגורשים.'),
- P('HE','עושים תנ"ך','מסע סנחריב: גירסת העורך (בעז סתוי)','',[['osimhistoria','https://www.osimhistoria.com/osim-tanach/osimtanach_ep71']],null,'','משווה בין המנסרות והתבליטים לספר מלכים, ושואל למה ירושלים לא נכבשה.'),
- P('HE','עושים תנ"ך','מסע סנחריב: גירסת הבמאי (שחר ענבר)','45 דק\'',[['Apple','https://podcasts.apple.com/au/podcast/%D7%9E%D7%A1%D7%A2-%D7%A1%D7%A0%D7%97%D7%A8%D7%99%D7%91-%D7%92%D7%99%D7%A8%D7%A1%D7%AA-%D7%94%D7%91%D7%9E%D7%90%D7%99-%D7%A9%D7%97%D7%A8-%D7%A2%D7%A0%D7%91%D7%A8-%D7%A2%D7%95%D7%A9%D7%99%D7%9D-%D7%AA%D7%A0-%D7%9A/id1194636676?i=1000715102830'],['Spreaker','https://www.spreaker.com/episode/ms-snhryb-gyrst-hbm-y-shr-nbr-wsym-tn-k--66794813']],['לא רשמי','https://www.podtext.co.il/post/making-a-bible-30-06-2025'],'','הסיפור במלכים ובישעיהו כמה "טייקים" סותרים, והעורך כמי שמעביר מסר תאולוגי.'),
+ P('HE','עושים תנ"ך','מסע סנחריב: גירסת העורך (בעז סתוי)','',[['osimhistoria','https://osimhistoria.com/podcast/%d7%a2%d7%95%d7%a9%d7%99%d7%9d-%d7%aa%d7%a0%d7%9a-%d7%9e%d7%a1%d7%a2-%d7%a1%d7%a0%d7%97%d7%a8%d7%99%d7%91-%d7%92%d7%99%d7%a8%d7%a1%d7%aa-%d7%94%d7%a2%d7%95%d7%a8%d7%9a-%d7%a2%d7%9d/']],null,'','משווה בין המנסרות והתבליטים לספר מלכים, ושואל למה ירושלים לא נכבשה.'),
+ P('HE','עושים תנ"ך','מסע סנחריב: גירסת הבמאי (שחר ענבר)','45 דק\'',[['Apple','https://podcasts.apple.com/au/podcast/%D7%9E%D7%A1%D7%A2-%D7%A1%D7%A0%D7%97%D7%A8%D7%99%D7%91-%D7%92%D7%99%D7%A8%D7%A1%D7%AA-%D7%94%D7%91%D7%9E%D7%90%D7%99-%D7%A9%D7%97%D7%A8-%D7%A2%D7%A0%D7%91%D7%A8-%D7%A2%D7%95%D7%A9%D7%99%D7%9D-%D7%AA%D7%A0-%D7%9A/id1194636676?i=1000715102830'],['Spreaker','https://www.spreaker.com/episode/ms-snhryb-gyrst-hbm-y-shr-nbr-wsym-tn-k--66794813']],null,'','הסיפור במלכים ובישעיהו כמה "טייקים" סותרים, והעורך כמי שמעביר מסר תאולוגי.'),
  P('EN','Histories of the Holy Land #61','Sennacherib\'s Campaign and the Siege of Lachish','32 דק\'',[['Apple','https://podcasts.apple.com/us/podcast/61-sennacheribs-campaign-and-the-siege-of-lachish/id1630517855?i=1000773334212']],null,'','למה סנחריב הקדיש חדר שלם ללכיש ושתק על ירושלים; סוללת המצור והחפירות.'),
  P('EN','Digging for Truth #178','King Sennacherib (וידאו)','',[['YouTube','https://www.youtube.com/watch?v=yjSucp73Hwk']],null,'','סקירה אפולוגטית-שמרנית של מסע 701. כדאי לשמוע לצד "עושים תנ"ך".'),
- P('EN','100 Objects #22','Sphinx of Taharqo','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qm8z8']],['רשמי ⚠️',BBC_T+'22/'],'כל הפרק','הפרעונים הכושים, ובהם תרהקה, שנזכר במסע סנחריב (מל"ב יט 9).')],
+ P('EN','100 Objects #22','Sphinx of Taharqo','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qm8z8']],['רשמי',BBC_T+'22/'],'כל הפרק','הפרעונים הכושים, ובהם תרהקה, שנזכר במסע סנחריב (מל"ב יט 9).')],
 lionhunt:[P('EN','The Ancients #576','Ashurbanipal','52 דק\'',[['Apple','https://podcasts.apple.com/gb/podcast/ashurbanipal-the-last-great-king-of-assyria/id1520403988?i=1000722101693'],['Spotify','https://open.spotify.com/episode/1qd4fAD9BwPabIKk7Csfak']],null,'','אשורבניפל ככובש אכזר וכמלומד אספן לוחות. רקע לציד האריות ולספריית נינוה.')],
 alexander:[
- P('EN','100 Objects #31','Coin with head of Alexander','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sbryz']],['רשמי ⚠️',BBC_T+'31/'],'כל הפרק','יורשי אלכסנדר ניכסו את דמותו המאולהת לצורכי לגיטימציה.'),
+ P('EN','100 Objects #31','Coin with head of Alexander','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sbryz']],['רשמי',BBC_T+'31/'],'כל הפרק','יורשי אלכסנדר ניכסו את דמותו המאולהת לצורכי לגיטימציה.'),
  P('HE','עושים היסטוריה #382–386','אלכסנדר הגדול','',[['חלק ג\'','https://osimhistoria.com/podcast/384-%D7%90%D7%9C%D7%9B%D7%A1%D7%A0%D7%93%D7%A8-%D7%94%D7%92%D7%93%D7%95%D7%9C-%D7%97%D7%9C%D7%A7-%D7%92-%D7%A2%D7%95%D7%A9%D7%99%D7%9D-%D7%94%D7%99%D7%A1%D7%98%D7%95%D7%A8%D7%99%D7%94/'],['חלק ה\'','https://osimhistoria.com/podcast/386-%D7%90%D7%9C%D7%9B%D7%A1%D7%A0%D7%93%D7%A8-%D7%94%D7%92%D7%93%D7%95%D7%9C-%D7%97%D7%9C%D7%A7-%D7%94-%D7%95%D7%90%D7%97%D7%A8%D7%95%D7%9F-%D7%A2%D7%95%D7%A9%D7%99%D7%9D-%D7%94%D7%99%D7%A1%D7%98/']],['טקסט בבלוג ⚠️','https://www.ranlevi.co.il/blog/alexander-the-great'],'','מהכיבושים באסיה הקטנה ועד מותו.'),
  P('EN','In Our Time','Judas Maccabeus','42 דק\'',[['Apple','https://podcasts.apple.com/gb/podcast/judas-maccabeus/id73330895?i=1000377912771']],null,'','גזירות אנטיוכוס, מרד החשמונאים ויהודה המכבי כגיבור.'),
  P('HE','הפודקאסט של התנ"ך #56','מרד החשמונאים – הפער בין האגדה למציאות','',[['Apple','https://podcasts.apple.com/us/podcast/56-%D7%9E%D7%A8%D7%93-%D7%94%D7%97%D7%A9%D7%9E%D7%95%D7%A0%D7%90%D7%99%D7%9D-%D7%94%D7%A4%D7%A2%D7%A8-%D7%91%D7%99%D7%9F-%D7%94%D7%90%D7%92%D7%93%D7%94-%D7%9C%D7%9E%D7%A6%D7%99%D7%90%D7%95%D7%AA/id1355374069?i=1000501146959']],null,'','סיפור חנוכה המסורתי מול ספרי המקבים והמחקר.')],
 lletters:[P('HE','עושים תנ"ך','הכתב והכתיבה בישראל הקדום (ישראל פינקלשטיין)','',[['דף התוכנית ⚠️','https://podcastim.org.il/%D7%A2%D7%95%D7%A9%D7%99%D7%9D-%D7%AA%D7%A0%D7%9A/']],null,'','התפשטות הכתיבה בישראל וביהודה; האוסטרקונים מלכיש ומערד הם עדות מרכזית.')],
-standard:[P('EN','100 Objects #12','Standard of Ur','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qb5xv']],['רשמי ⚠️',BBC_T+'12/'],'כל הפרק','צד "מלחמה" וצד "שלום" כחלון לעיר-המדינה הראשונה: צבא, מסים, מלך וחברה מרובדת.'),
+standard:[P('EN','100 Objects #12','Standard of Ur','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qb5xv']],['רשמי',BBC_T+'12/'],'כל הפרק','צד "מלחמה" וצד "שלום" כחלון לעיר-המדינה הראשונה: צבא, מסים, מלך וחברה מרובדת.'),
  P('EN','The Ancients','Sargon of Akkad (הוקלט במוזיאון)','43 דק\'',[['Apple','https://podcasts.apple.com/us/podcast/sargon-of-akkad/id1520403988?i=1000683488778']],null,'','רקע לשומר ולאכד, לאולמות 55–56.')],
 game:[P('EN','British Museum','Tom Scott vs Irving Finkel: The Royal Game of Ur','25:33',[['YouTube','https://www.youtube.com/watch?v=WZskjLq040I']],null,'מ-21:40','פינקל, ששחזר את החוקים מלוח בכתב יתדות, משחק ומסביר על הלוח והקוביות.'),
  P('EN','Curator\'s Corner','Deciphering the world\'s oldest rule book','',[['YouTube ⚠️','https://www.youtube.com/watch?v=wHjznvH54Cw']],null,'','איך לוח בבלי מאוחר אפשר לשחזר את חוקי המשחק.')],
 flood:[
- P('EN','100 Objects #16','Flood Tablet','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qg5my']],['רשמי ⚠️',BBC_T+'16/'],'כל הפרק','איך ג\'ורג\' סמית זיהה ב-1872 סיפור מבול קדום לנח, ומה המשמעות לקריאת בראשית.'),
+ P('EN','100 Objects #16','Flood Tablet','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qg5my']],['רשמי',BBC_T+'16/'],'כל הפרק','איך ג\'ורג\' סמית זיהה ב-1872 סיפור מבול קדום לנח, ומה המשמעות לקריאת בראשית.'),
  P('EN','Lex Fridman #487','Irving Finkel','',[['האתר','https://lexfridman.com/irving-finkel/']],['רשמי ✅','https://lexfridman.com/irving-finkel-transcript/'],'1:30:21 מבול · 1:41:44 תיבת נח','פינקל מסביר את "לוח התיבה" הבבלי, שלפיו התיבה הייתה עגולה כמו סירת קורקל.'),
  P('EN','Oriental Institute','The Ark Before Noah (הרצאה)','',[['YouTube ⚠️','https://www.youtube.com/watch?v=s_fkpZSnz2I']],null,'','איך לוח משפחתי שהובא למוזיאון התברר כהוראות לבניית תיבה.'),
  P('EN','In Our Time','The Epic of Gilgamesh ⚠️','',[['דף הסדרה','https://www.bbc.co.uk/programmes/b006qykl']],null,'','האפוס מהשירים השומריים ועד הנוסח הבבלי, כולל לוח XI.'),
@@ -377,16 +383,16 @@ cyrus:[
  P('EN','The Ancients','The Cyrus Cylinder (אירווינג פינקל)','',[['Acast','https://shows.acast.com/the-ancients/episodes/the-cyrus-cylinder']],null,'','הגליל כמסמך יסוד קבור, כיבוש בבל והמורשת הפוליטית.'),
  P('EN','In Our Time','Cyrus the Great','51 דק\'',[['Deezer','https://www.deezer.com/en/show/699852']],null,'','כורש בין הרודוטוס, קסנופון והתנ"ך, והוויכוח על "מגילת זכויות אדם".'),
  P('EN','Bible 365 #138','The Cyrus Cylinder and the Fall of Babel','',[['Tikvah','https://ideas.tikvah.org/meirsoloveichik/podcasts/bible-365/episode/the-cyrus-cylinder-and-the-fall-of-babel']],null,'','הגליל לצד נבואות ישעיהו על פרס, מנקודת מבט יהודית-אורתודוקסית.'),
- P('EN','The History of Persia #8','Fill in the Titles','',[['האתר','https://historyofpersiapodcast.com/2019/04/16/episode-8-fill-in-the-titles/']],null,'','מעבר על טקסט הגליל קטע אחר קטע.')],
+ P('EN','The History of Persia #8','Fill in the Titles','',[['האתר','https://hopfulmedia.com/2019/04/16/episode-8-fill-in-the-titles/']],null,'','מעבר על טקסט הגליל קטע אחר קטע.')],
 oxus:[
- P('EN','100 Objects #26','Oxus Chariot Model','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qsvjm']],['רשמי ⚠️',BBC_T+'26/'],'כל הפרק','ניהול האימפריה הפרסית: דרכים, שליחים ומשטר סובלני כלפי עמים כבושים.'),
- P('EN','100 Objects #25','Gold Coin of Croesus','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qm8zg']],['רשמי ⚠️',BBC_T+'25/'],'כל הפרק','ראשית המטבע בלידיה, שכורש כבש.')],
-hinton:[P('EN','100 Objects #44','Hinton St Mary Mosaic','~15 דק\'',[['דף הסדרה ⚠️','https://www.bbc.co.uk/programmes/b00nrtd2']],['רשמי ⚠️',BBC_T+'44/'],'כל הפרק','אחד הדימויים הקדומים של ישו, לצד הכי-רו ובלרופון.')],
+ P('EN','100 Objects #26','Oxus Chariot Model','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qsvjm']],['רשמי',BBC_T+'26/'],'כל הפרק','ניהול האימפריה הפרסית: דרכים, שליחים ומשטר סובלני כלפי עמים כבושים.'),
+ P('EN','100 Objects #25','Gold Coin of Croesus','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qm8zg']],['רשמי',BBC_T+'25/'],'כל הפרק','ראשית המטבע בלידיה, שכורש כבש.')],
+hinton:[P('EN','100 Objects #44','Hinton St Mary Mosaic','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00shkn4']],['רשמי',BBC_T+'44/'],'כל הפרק','אחד הדימויים הקדומים של ישו, לצד הכי-רו ובלרופון.')],
 money:[P('EN','In Our Time','Josephus ⚠️','',[['דף הסדרה','https://www.bbc.co.uk/programmes/b006qykl']],null,'','יוספוס כמקור העיקרי למרד ולחורבן, שאותם מנציחים מטבעות "יהודה השבויה".')],
 roman:[
- P('EN','100 Objects #35','Head of Augustus','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sbrz7']],['רשמי ⚠️',BBC_T+'35/'],'כל הפרק','תעמולת הדיוקן הקיסרי, מפתח לקריאת מטבעות אספסיאנוס וטיטוס.'),
- P('EN','100 Objects #36','The Warren Cup','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sfgxd']],['רשמי ⚠️',BBC_T+'36/'],'כל הפרק','גביע רומי שנמצא לפי המסורת ליד ירושלים; התרבות הרומית-הלניסטית בארץ במאה ה-1.')],
-mummies:[P('EN','100 Objects #1','Mummy of Hornedjitef','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00pwmgq']],['רשמי ⚠️',BBC_T+'1/'],'כל הפרק','ארון כוהן תלמיי כחלון לאמונות על החיים שאחרי המוות.')]
+ P('EN','100 Objects #35','Head of Augustus','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sbrz7']],['רשמי',BBC_T+'35/'],'כל הפרק','תעמולת הדיוקן הקיסרי, מפתח לקריאת מטבעות אספסיאנוס וטיטוס.'),
+ P('EN','100 Objects #36','The Warren Cup','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sfgxd']],['רשמי',BBC_T+'36/'],'כל הפרק','גביע רומי שנמצא לפי המסורת ליד ירושלים; התרבות הרומית-הלניסטית בארץ במאה ה-1.')],
+mummies:[P('EN','100 Objects #1','Mummy of Hornedjitef','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00pwmgq']],['רשמי',BBC_T+'1/'],'כל הפרק','ארון כוהן תלמיי כחלון לאמונות על החיים שאחרי המוות.')]
 };
 
 /* stops: rooms on the schematic, items in walking order */
@@ -394,16 +400,16 @@ const STOPS={
 r4:{floor:0,rooms:['4'],title:'חדר 4',name:'מצרים: פיסול',items:['rosetta','ramesses'],way:'מהכניסה הראשית לחצר הגדולה (Great Court) ופונים שמאלה. אבן רוזטה באמצע חדר 4, ליד הכניסה מהחצר.'},
 r24:{floor:0,rooms:['24'],title:'חדר 24',name:'חיים ומוות',items:['hoa'],way:'חוזרים לחצר הגדולה וחוצים אותה צפונה. חדר 24 מאחורי חדר הקריאה, בצד הצפוני.'},
 r33:{floor:0,rooms:['33'],title:'חדר 33',name:'סין ודרום אסיה (Level 1)',items:['tang','shiva'],way:'ליד חדר 24 עולים במדרגות הצפוניות (North stairs) ל-Level 1. חדר 33 הוא גלריה ארוכה ממזרח למערב.'},
-r6:{floor:0,rooms:['6'],title:'חדר 6',name:'פיסול אשורי ושערי בלוואת',items:['obelisk','balawat','lamassu'],way:'בקצה הדרומי של חדר 4, לכיוון הכניסה הראשית.'},
+r6:{floor:0,rooms:['6'],title:'חדר 6',name:'פיסול אשורי ושערי בלוואת',items:['obelisk','kurkh','balawat','lamassu'],way:'בקצה הדרומי של חדר 4, לכיוון הכניסה הראשית.'},
 r7:{floor:0,rooms:['7','8'],title:'חדרים 7–8',name:'אשור: נמרוד',items:['nimrud'],limit:['7'],way:'יורדים בחזרה לחצר, מערבה לחדר 4 ודרומה עד חדר 6. משם צפונה לגלריה שמקבילה לחדר 4. חדר 7 נפתח ב-11:00.'},
-r10:{floor:0,rooms:['10'],title:'חדר 10',name:'לכיש, ציד האריות, חורסבאד',items:['lachish','lionhunt','khorsabad'],limit:['10'],way:'מערבה מחדר 7. הסדר בתוך החדר משוער: עקבו אחרי התוויות 10a/10b/10c.'},
+r10:{floor:0,rooms:['10'],title:'חדר 10',name:'לכיש, ציד האריות, חורסבאד',items:['lachish','lionhunt','khorsabad'],limit:['10'],way:'מערבה מחדר 7. לכיש ב-10a אזור A, ציד האריות ב-10a אזור C, השוורים ב-10c.'},
 r9:{floor:0,rooms:['9'],title:'חדר 9',name:'אשור: נינוה',items:['nineveh'],limit:['9'],way:'חוזרים לחדר 7–8 וממשיכים צפונה עד הקצה, לחדר 9.'},
 r21:{floor:0,rooms:['21','22','23'],title:'חדרים 21–23',name:'המאוזוליאון ועולמו של אלכסנדר',items:['mausoleum','alexander','ephesus'],way:'מערבה מחדר 9 לחדר 21, ומשם דרומה ל-22 ול-23.'},
 r17:{floor:0,rooms:['17'],title:'חדר 17',name:'אנדרטת הנראידות',items:['nereid'],way:'מערבה מחדר 23.'},
 r18:{floor:0,rooms:['18'],title:'חדר 18',name:'פסלי הפרתנון',items:['parthenon'],way:'ממשיכים מערבה, עד הקצה המערבי של הבניין.'},
 r57:{floor:1,rooms:['59','58','57'],title:'חדרים 57–59',name:'הלבנט הקדום',items:['levant','ivories','lletters','steward'],limit:['57','58'],way:'עולים במדרגות המערביות (West stairs) לקומה 3. חדר 59 בראש המדרגות; ממשיכים מזרחה ל-58 ול-57. חדרים 57–58 פתוחים רק עד 15:00.'},
 r56:{floor:1,rooms:['56'],title:'חדר 56',name:'מסופוטמיה 6000–1500 לפנה"ס: אור',items:['ram','standard','game'],way:'ממשיכים מזרחה מחדר 57.'},
-r55:{floor:1,rooms:['55'],title:'חדר 55',name:'מסופוטמיה 1500–539 לפנה"ס: בבל',items:['flood','taylor','chronicle','belshazzar'],way:'מזרחה מחדר 56.'},
+r55:{floor:1,rooms:['55'],title:'חדר 55',name:'מסופוטמיה 1500–539 לפנה"ס: בבל',items:['flood','taylor','chronicle','nebo','belshazzar'],way:'מזרחה מחדר 56.'},
 r52:{floor:1,rooms:['52'],title:'חדר 52',name:'איראן הקדומה: פרס',items:['cyrus','oxus'],way:'מזרחה דרך 54 ו-53, ובפינה פונים דרומה לחדר 52.'},
 r49:{floor:1,rooms:['49'],title:'חדר 49',name:'בריטניה הרומית',items:['hinton'],way:'דרומה לאורך האגף המזרחי, דרך חדרים 51 ו-50.'},
 r42:{floor:1,rooms:['42'],title:'חדר 42',name:'העולם האסלאמי',items:['astrolabe'],way:'מחדר 49 דרומה לחדר 41, ומזרחה לחדר 42.'},
@@ -554,11 +560,13 @@ function itemHtml(k){
     <div class="hd">
       <button class="check" role="checkbox" aria-checked="${on}" data-item="${k}" aria-label="ראיתי: ${esc(it.t)}"><span>${I.check}</span></button>
       <div class="t"><h3>${esc(it.t)}</h3>
-        <div class="sub">${it.sub.map(x=>`<span dir="auto">${esc(x)}</span>`).join('<span>·</span>')}${it.star?`<span class="chip star">Don't miss · ${it.star}</span>`:''}${it.warn?'<span class="chip bad">⚠ מיקום לא אומת</span>':''}</div></div>
+        <div class="sub">${it.sub.map(x=>`<span dir="auto">${esc(x)}</span>`).join('<span>·</span>')}${it.star?`<span class="chip star">Don't miss · ${it.star}</span>`:''}${it.warn?'<span class="chip bad">⚠ מיקום לא אומת</span>':''}${it.off?'<span class="chip bad">לא מוצג כרגע</span>':''}</div></div>
     </div>
+    ${it.note?`<div class="note">${I.warn}<span>${esc(it.note)}</span></div>`:''}
     <p>${esc(it.p)}</p>
     ${it.b?`<div class="bible"><b>מקרא:</b> ${esc(it.b)}</div>`:''}
     ${it.l.length?`<div class="links">${it.l.map(l=>linkHtml(l)).join('')}</div>`:''}
+    ${(()=>{const ps=PODS[k]||[];return `<div class="pods"><div class="h4">${I.head}האזנה וקריאה על הפריט (${ps.length})</div>${ps.length?ps.map(podHtml).join(''):`<div class="empty">אין פרק ייעודי לפריט הזה.</div>`}</div>`})()}
   </article>`;
 }
 /* Spotify: a search for the episode (opens the Spotify app); skipped for videos and when a direct Spotify link exists */
@@ -589,10 +597,6 @@ function renderSheet(id){
   let h=`<div class="way">${I.walk}<span>${esc(s.way)}</span></div>`;
   h+=`<div class="h4">${I.pillar}פריטים בחדר (${stopProg(id)}/${s.items.length})</div>`;
   h+=s.items.map(itemHtml).join('');
-  const pods=s.items.flatMap(k=>(PODS[k]||[]).map(p=>({...p,for:ITEMS[k].t})));
-  h+=`<div class="h4">${I.head}האזנה וקריאה (${pods.length})</div>`;
-  if(pods.length){let last='';pods.forEach(p=>{if(p.for!==last&&s.items.length>1){h+=`<div class="empty">ל${esc(p.for)}:</div>`;last=p.for}h+=podHtml(p)})}
-  else h+=`<div class="empty">לא נמצא פרק ייעודי לחדר הזה. מומלץ לשמוע את פרקי חדר 10 (לכיש).</div>`;
   $('#shBody').innerHTML=h;
   const prev=i>0?r[i-1][0]:null, next=i>=0&&i<r.length-1?r[i+1][0]:null;
   $('#shFoot').innerHTML=`<button class="glass" ${prev?`data-go="${prev}"`:'disabled'}><span>→ הקודם</span><small>${prev?esc(STOPS[prev].title):''}</small></button>
@@ -664,7 +668,7 @@ const INFO_HTML=`<div class="info" style="display:flex;flex-direction:column;gap
 <h3>טיפים</h3>
 <ul><li>הקליטה באולמות חלשה: להוריד מראש את הפודקאסטים לאפליקציה.</li><li>אוכל: 12:30 או אחרי 13:45. Pizzeria, Court Café, Great Court Restaurant.</li><li>צילום מותר לשימוש אישי, בלי פלאש וחצובה ⚠️.</li></ul>
 <h3>לשאול בדלפק המידע</h3>
-<ul><li>מכתבי אל-עמארנה (מכתבי עבדי-חבה מירושלים נמצאים בברלין).</li><li>כתובת הפוליטרכים (מה"ש יז 6) – <a href="${BM}G_1877-0511-1" target="_blank" rel="noopener">BM</a>, מוצגת לעתים.</li><li>מונוליט כורח (אחאב, 853 לפנה"ס) – <a href="${W}Kurkh_Monoliths" target="_blank" rel="noopener">Wikipedia</a>.</li><li>לוח נבו-שר-סכים (ירמיהו לט 3) – <a href="${W}Nebo-Sarsekim_Tablet" target="_blank" rel="noopener">Wikipedia</a>.</li><li>יציקות מצבת מישע וכתובת השילוח – <a href="${BM}W_C-219" target="_blank" rel="noopener">BM</a>.</li></ul>
+<ul><li>מכתבי אל-עמארנה (מכתבי עבדי-חבה מירושלים נמצאים בברלין).</li><li>כתובת הפוליטרכים (מה"ש יז 6) – <a href="${BM}G_1877-0511-1" target="_blank" rel="noopener">BM</a>: לא מוצגת כרגע.</li><li>יציקות מצבת מישע וכתובת השילוח – <a href="${BM}W_C-219" target="_blank" rel="noopener">BM</a>: לא מוצגות כרגע.</li><li>מונוליט כורח ולוח נבו-שר-סכים מוצגים: הם במסלול בחדרים 6 ו-55.</li></ul>
 <h3>כתובות שאינן במוזיאון</h3>
 <div class="tbl"><table><thead><tr><th>כתובת</th><th>תאריך</th><th>שם מקראי</th><th>מיקום</th></tr></thead><tbody>
 <tr><td><a href="${W}Mesha_Stele" target="_blank" rel="noopener">מצבת מישע</a></td><td>כ-840 לפנה"ס</td><td>עמרי, מישע (מל"ב ג)</td><td>הלובר</td></tr>
