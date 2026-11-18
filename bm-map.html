@@ -460,6 +460,12 @@ Object.entries(PODX).forEach(([k,arr])=>arr.forEach(x=>{const p=PODS[k]&&PODS[k]
 const TRQ=[['rosetta','100 Objects #33','it is decidedly dull'],['ramesses','100 Objects #20','Ozymandias is our Ramesses II'],['lachish','100 Objects #21','run like a continuous frieze pretty well from floor to ceiling'],['lachish','100 Objects #22','heading for a stone sphinx'],['lachish','גירסת הבמאי','ואת לכיש סנחריב לקח כפרויקט אישי'],['alexander','100 Objects #31','the very coin that shows the idealised Alexander'],['alexander','אלכסנדר הגדול','סיווה'],['standard','100 Objects #12','Woolley called it the Standard of Ur'],['flood','100 Objects #16','The fragment that George Smith was particularly interested in'],['flood','Lex Fridman','And many of those stories are sadly lost to time or not yet found'],['game','Lex Fridman','You have to tell me about the world of ancient games'],['oxus','100 Objects #26','a chariot made of solid gold'],['oxus','100 Objects #25','some of the original gold coins that made Croesus so rich'],['hinton','100 Objects #44','this time in mosaic'],['roman','100 Objects #35','We have his bronze head here'],['roman','100 Objects #36','The Warren Cup is made of silver'],['mummies','100 Objects #1','now much more interested in the mummy']];
 TRQ.forEach(([k,c,q])=>{(PODS[k]||[]).forEach(p=>{if((p.show+' '+p.ep).includes(c))p.trq=q})});
 
+/* episodes that also discuss other objects: reuse them there, at that object's moment */
+{const dir=PODS.lachish.find(p=>p.ep.includes('גירסת הבמאי')), dig=PODS.lachish.find(p=>p.show.includes('Digging'));
+ PODS.taylor=[{...dir,t:420,at:`מנסרת סנחריב בערך 7:00 (הערכה)`,cue:`"סנחריב השאיר כתובת מאוד מפורטת"`,trq:'סנחריב השאיר כתובת מאוד מפורטת'},{...dig,ytT:562,at:`הפלישה ליהודה והמנסרות מ-9:22`}];
+ PODS.nineveh=[{...dig}];
+ PODS.kurkh=[{...PODS.obelisk[0]}];}
+
 /* stops: rooms on the schematic, items in walking order */
 const STOPS={
 r4:{floor:0,rooms:['4'],title:'חדר 4',name:'מצרים: פיסול',items:['rosetta','ramesses'],way:'מהכניסה הראשית לחצר הגדולה (Great Court) ופונים שמאלה. אבן רוזטה באמצע חדר 4, ליד הכניסה מהחצר.'},
