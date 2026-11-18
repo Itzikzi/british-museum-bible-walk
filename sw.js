@@ -1,5 +1,5 @@
 // Offline cache. Bump VERSION on every content change so phones pick up the new page.
-const VERSION = 'v16';
+const VERSION = 'v17';
 const CORE = ['./', 'index.html', 'maps/ground.png', 'maps/upper.png', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
