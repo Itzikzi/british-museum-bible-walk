@@ -16,6 +16,7 @@
   --glass-hi:rgba(255,255,255,.95); --shadow:rgba(40,45,70,.16); --line:rgba(29,35,51,.10);
   --room:#cfc6b3; --room-ctx:rgba(29,35,51,.07); --court:rgba(255,255,255,.45);
   --blob1:rgba(36,69,163,.38); --blob2:rgba(185,71,42,.30); --blob3:rgba(169,123,28,.30);
+  --map-filter:none; --ov-fill:rgba(242,184,48,.42); --ov-stroke:#f2b830;
   --f-body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --f-display:"Frank Ruhl Libre","Times New Roman",serif;
   --r-lg:26px; --r-md:18px;
@@ -25,13 +26,13 @@
   --lapis:#8aa6ff; --lapis-soft:rgba(138,166,255,.16); --carnelian:#ff8a6a; --gold:#e3b75a; --ok:#5fd39a; --ok-soft:rgba(95,211,154,.15); --warn-soft:rgba(255,138,106,.16);
   --glass:rgba(32,40,68,.48); --glass-strong:rgba(30,37,62,.82); --glass-edge:rgba(255,255,255,.14); --glass-hi:rgba(255,255,255,.22);
   --shadow:rgba(0,0,0,.45); --line:rgba(255,255,255,.10); --room:#3a4566; --room-ctx:rgba(255,255,255,.06); --court:rgba(255,255,255,.05);
-  --blob1:rgba(70,100,220,.45); --blob2:rgba(200,80,50,.28); --blob3:rgba(200,150,50,.22); color-scheme:dark}}
+  --blob1:rgba(70,100,220,.45); --blob2:rgba(200,80,50,.28); --blob3:rgba(200,150,50,.22); --map-filter:invert(.9) hue-rotate(180deg); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f1426; --bg2:#151c33; --ink:#eef0f6; --ink2:#c3c8d8; --ink3:#a0a7bd;
   --lapis:#8aa6ff; --lapis-soft:rgba(138,166,255,.16); --carnelian:#ff8a6a; --gold:#e3b75a; --ok:#5fd39a; --ok-soft:rgba(95,211,154,.15); --warn-soft:rgba(255,138,106,.16);
   --glass:rgba(32,40,68,.48); --glass-strong:rgba(30,37,62,.82); --glass-edge:rgba(255,255,255,.14); --glass-hi:rgba(255,255,255,.22);
   --shadow:rgba(0,0,0,.45); --line:rgba(255,255,255,.10); --room:#3a4566; --room-ctx:rgba(255,255,255,.06); --court:rgba(255,255,255,.05);
-  --blob1:rgba(70,100,220,.45); --blob2:rgba(200,80,50,.28); --blob3:rgba(200,150,50,.22); color-scheme:dark}
+  --blob1:rgba(70,100,220,.45); --blob2:rgba(200,80,50,.28); --blob3:rgba(200,150,50,.22); --map-filter:invert(.9) hue-rotate(180deg); color-scheme:dark}
 
 *{box-sizing:border-box}
 body{direction:rtl;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
@@ -73,6 +74,11 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 
 .maplegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.78rem;color:var(--ink2);padding:4px 6px 2px}
 .maplegend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:5px;vertical-align:-1px}
 .room-ctx{fill:var(--room-ctx)}
+.seg.mini button{min-height:34px;font-size:.85rem}
+.realmap{filter:var(--map-filter)}
+.room-stop.ov{fill:var(--ov-fill);stroke:var(--ov-stroke);stroke-width:3}
+.room-stop.ov.done{fill:rgba(31,160,90,.38);stroke:#2bb673}
+.room-stop.ov:hover{fill:var(--ov-fill)}
 .room-stop{fill:var(--lapis-soft);stroke:var(--lapis);stroke-width:1.6;cursor:pointer;transition:fill .2s}
 .room-stop.done{fill:var(--ok-soft);stroke:var(--ok)}
 .room-stop.closed{stroke-dasharray:4 3}
@@ -220,6 +226,10 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 
       <button id="fl-0" aria-pressed="true">קומת קרקע</button>
       <button id="fl-1" aria-pressed="false">קומה עליונה</button>
     </div>
+    <div class="seg mini" role="group" aria-label="סוג מפה" style="margin-bottom:8px">
+      <button id="mm-real" aria-pressed="true">מפת המוזיאון</button>
+      <button id="mm-plan" aria-pressed="false">מפה פשוטה</button>
+    </div>
     <svg class="map" id="map" role="img" aria-label="תכנית סכמטית של הקומה"></svg>
     <div class="maplegend">
       <span><i style="background:var(--carnelian)"></i>הבא בתור</span>
@@ -230,7 +240,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 
     <div class="mapbtns">
       <a class="lk" href="https://www.britishmuseum.org/sites/default/files/2026-05/British_Museum_map.pdf" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>המפה הרשמית (PDF)</a>
-      <span class="chip info" style="align-self:center">תכנית סכמטית, לא בקנה מידה</span>
+      <span class="chip info" style="align-self:center" id="mapCredit">מפה: <span class="ltr">© The Trustees of the British Museum, 03/2026</span></span>
     </div>
   </section>
 
@@ -417,7 +427,7 @@ const PLAN=[
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let seen=new Set(LS.get('bm-seen',[]));
 let routeKey=LS.get('bm-route','full');
-let floor=0, openId=null;
+let floor=0, openId=null, mapMode=LS.get('bm-mapmode','real');
 
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -467,22 +477,28 @@ function renderMap(){
   const r=route(), nx=nextStop();
   const roomOwner={};
   Object.entries(STOPS).forEach(([id,s])=>{if(s.floor===floor)s.rooms.forEach(rm=>roomOwner[rm]=id)});
+  const real=mapMode==='real';
   let h='';
+  if(real){
+    const [vx,vy,vw,vh]=P.vb.split(' ');
+    h+=`<image class="realmap" href="maps/${floor?'upper':'ground'}.png" x="${vx}" y="${vy}" width="${vw}" height="${vh}" preserveAspectRatio="none"/>`;
+  } else {
   if(P.court) h+=`<rect x="${P.court[0]}" y="${P.court[1]}" width="${P.court[2]}" height="${P.court[3]}" rx="22" fill="var(--court)" stroke="var(--line)"/>`;
   h+=`<circle cx="${P.circle[0]}" cy="${P.circle[1]}" r="${P.circle[2]}" fill="var(--court)" stroke="var(--line)" stroke-width="1.5"/>`;
   if(floor===0) h+=`<text class="rlab" x="${P.circle[0]}" y="${P.circle[1]+4}">Reading Room</text>`;
   if(P.pizza) h+=`<rect x="${P.pizza[0]}" y="${P.pizza[1]}" width="${P.pizza[2]}" height="${P.pizza[3]}" rx="10" fill="var(--room-ctx)"/>`;
   P.ctx.forEach(([n,x,y,w,hh])=>{h+=`<rect class="room-ctx" x="${x}" y="${y}" width="${w}" height="${hh}" rx="6"/>`;if(hh>=22)h+=`<text class="rnum" x="${x+w/2}" y="${y+hh/2}" style="opacity:.6">${n}</text>`});
+  }
   Object.entries(P.rooms).forEach(([n,[x,y,w,hh]])=>{
     const id=roomOwner[n], inRoute=id&&routeIdx(id)>=0;
     const st=id&&STOPS[id];
-    const cls=['room-stop'];
+    const cls=['room-stop'];if(real)cls.push('ov');
     if(id&&stopDone(id))cls.push('done');
     if(st&&(st.limit||[]).includes(n))cls.push('closed');
     h+=`<rect class="${cls.join(' ')}" data-stop="${id}" x="${x}" y="${y}" width="${w}" height="${hh}" rx="6" ${inRoute?'':'style="opacity:.45"'}><title>חדר ${n}</title></rect>`;
-    h+=`<text class="rnum" x="${x+w/2}" y="${hh>=60?y+hh/2+8:y+hh/2+6}" style="fill:var(--ink)">${n}</text>`;
+    if(!real) h+=`<text class="rnum" x="${x+w/2}" y="${hh>=60?y+hh/2+8:y+hh/2+6}" style="fill:var(--ink)">${n}</text>`;
   });
-  P.labels.forEach(([x,y,t])=>h+=`<text class="rlab" x="${x}" y="${y}">${t}</text>`);
+  if(!real) P.labels.forEach(([x,y,t])=>h+=`<text class="rlab" x="${x}" y="${y}">${t}</text>`);
   // route path + pins
   const pts=[];
   r.forEach(([id],i)=>{const s=STOPS[id];if(s.floor!==floor)return;const rr=P.rooms[s.rooms[0]];const c=pinPos(rr);pts.push({id,i,c})});
@@ -535,12 +551,23 @@ function itemHtml(k){
     ${it.l.length?`<div class="links">${it.l.map(l=>linkHtml(l)).join('')}</div>`:''}
   </article>`;
 }
+/* Spotify: a search for the episode (opens the Spotify app); skipped for videos and when a direct Spotify link exists */
+const SHOW_FULL={'100 Objects':'A History of the World in 100 Objects'};
+function spotifyUrl(p){
+  if(p.listen.some(([,u])=>/youtube\.com|ted\.com|spotify\.com/.test(u))) return null;
+  const clean=x=>x.replace(/#[\d–-]+/g,'').replace(/\([^)]*\)/g,'').replace(/⚠️?/g,'').trim();
+  const show=clean(p.show); const q=`${SHOW_FULL[show]||show} ${clean(p.ep)}`.replace(/\s+/g,' ');
+  return 'https://open.spotify.com/search/'+encodeURIComponent(q);
+}
+/* Hebrew transcript: Google Translate of the English transcript page */
+const heUrl=u=>'https://translate.google.com/translate?sl=en&tl=iw&u='+encodeURIComponent(u);
 function podHtml(p){
+  const sp=spotifyUrl(p), heTr=p.tr&&p.l==='EN'?heUrl(p.tr[1]):null;
   return `<div class="pod">
     <div class="hd"><span class="lang">${p.l}</span><div class="ttl" dir="auto">${esc(p.show)} · <span class="ep">${esc(p.ep)}</span></div></div>
     <div class="m">${p.len?`<span>⏱ <span dir="auto">${esc(p.len)}</span></span>`:''}${p.at?`<span class="chip star">מאיפה: ${esc(p.at)}</span>`:''}</div>
     <p>${esc(p.sum)}</p>
-    <div class="links">${p.listen.map(([lb,u])=>`<a class="lk pri" href="${esc(u)}" target="_blank" rel="noopener">${I.play}<span dir="auto">${esc(lb)}</span></a>`).join('')}${p.tr?`<a class="lk" href="${esc(p.tr[1])}" target="_blank" rel="noopener">${I.doc}תמלול ${esc(p.tr[0])}</a>`:''}</div>
+    <div class="links">${p.listen.map(([lb,u])=>`<a class="lk pri" href="${esc(u)}" target="_blank" rel="noopener">${I.play}<span dir="auto">${esc(lb)}</span></a>`).join('')}${sp?`<a class="lk pri" href="${esc(sp)}" target="_blank" rel="noopener">${I.play}<span dir="ltr">Spotify</span></a>`:''}${p.tr?`<a class="lk" href="${esc(p.tr[1])}" target="_blank" rel="noopener">${I.doc}תמלול ${esc(p.tr[0])}</a>`:''}${heTr?`<a class="lk" href="${esc(heTr)}" target="_blank" rel="noopener">${I.doc}תמלול בעברית</a>`:''}</div>
   </div>`;
 }
 
@@ -588,6 +615,7 @@ function openFromHash(){
 const go=id=>{location.hash=id};
 const close=()=>{if(location.hash){history.length>1&&openId?location.hash='':location.hash='';}};
 
+function setMode(m){mapMode=m;LS.set('bm-mapmode',m);$('#mm-real').setAttribute('aria-pressed',m==='real');$('#mm-plan').setAttribute('aria-pressed',m==='plan');$('#mapCredit').hidden=m!=='real';renderMap()}
 function setFloor(f){floor=f;$('#fl-0').setAttribute('aria-pressed',f===0);$('#fl-1').setAttribute('aria-pressed',f===1);renderMap()}
 function setRoute(k){routeKey=k;LS.set('bm-route',k);$('#rt-full').setAttribute('aria-pressed',k==='full');$('#rt-short').setAttribute('aria-pressed',k==='short');renderAll()}
 function renderAll(){renderClock();renderMap();renderList();if(openId&&openId!=='info')renderSheet(openId)}
@@ -601,6 +629,7 @@ document.addEventListener('click',e=>{
   const s=e.target.closest('[data-stop]'); if(s&&s.dataset.stop){go(s.dataset.stop);return}
 });
 $('#scrim').onclick=close; $('#shClose').onclick=close; $('#infoBtn').onclick=()=>go('info');
+$('#mm-real').onclick=()=>setMode('real'); $('#mm-plan').onclick=()=>setMode('plan'); setMode(mapMode);
 $('#fl-0').onclick=()=>setFloor(0); $('#fl-1').onclick=()=>setFloor(1);
 $('#rt-full').onclick=()=>setRoute('full'); $('#rt-short').onclick=()=>setRoute('short');
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&openId)close()});
