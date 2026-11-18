@@ -460,11 +460,41 @@ Object.entries(PODX).forEach(([k,arr])=>arr.forEach(x=>{const p=PODS[k]&&PODS[k]
 const TRQ=[['rosetta','100 Objects #33','it is decidedly dull'],['ramesses','100 Objects #20','Ozymandias is our Ramesses II'],['lachish','100 Objects #21','run like a continuous frieze pretty well from floor to ceiling'],['lachish','100 Objects #22','heading for a stone sphinx'],['lachish','גירסת הבמאי','ואת לכיש סנחריב לקח כפרויקט אישי'],['alexander','100 Objects #31','the very coin that shows the idealised Alexander'],['alexander','אלכסנדר הגדול','סיווה'],['standard','100 Objects #12','Woolley called it the Standard of Ur'],['flood','100 Objects #16','The fragment that George Smith was particularly interested in'],['flood','Lex Fridman','And many of those stories are sadly lost to time or not yet found'],['game','Lex Fridman','You have to tell me about the world of ancient games'],['oxus','100 Objects #26','a chariot made of solid gold'],['oxus','100 Objects #25','some of the original gold coins that made Croesus so rich'],['hinton','100 Objects #44','this time in mosaic'],['roman','100 Objects #35','We have his bronze head here'],['roman','100 Objects #36','The Warren Cup is made of silver'],['mummies','100 Objects #1','now much more interested in the mummy']];
 TRQ.forEach(([k,c,q])=>{(PODS[k]||[]).forEach(p=>{if((p.show+' '+p.ep).includes(c))p.trq=q})});
 
+/* YouTube uploads, with the second where the object is discussed (from each video's captions/chapters) */
+const YT=[
+ ['rosetta','100 Objects #33',[['YouTube חלק 1','3PVyIV-b5K0',13],['YouTube חלק 2','nSblOYPRbRo',0]],`כל הפרק (בשני חלקים)`],
+ ['rosetta','עושים היסטוריה #351',[['YouTube','xQLnEx6F1vE',877]],`האבן 14:37–17:00, ושוב 31:02–34:00`],
+ ['rosetta','יחידים במינם #79',[['YouTube','mU3V5F2jLhg',null]],`הזמן המדויק לא ידוע`],
+ ['rosetta','יחידים במינם #80',[],`הזמן המדויק לא ידוע`],
+ ['rosetta','מצרים ומדע',[['YouTube','Xx9ufRW8hMY',351]],`אבן רוזטה מ-5:51`],
+ ['obelisk','משחקי הכס ב',[['YouTube','HShhoSBwBfU',2383]],`האובליסק השחור 39:43–41:29 · מונוליט כורח מ-34:56`],
+ ['obelisk','משחקי הכס ג',[['YouTube','3eBnAlf8B0c',3421]],`החידה השלישית, האובליסק: 57:01`],
+ ['lachish','גירסת העורך',[['YouTube','Ok1OTA79MiY',2527]],`לכיש מ-42:07 · מנסרת סנחריב 48:48–55:41 · התבליטים לא מוזכרים`],
+ ['lachish','גירסת הבמאי',[['YouTube','qCb3Hby64hg',957]],`תבליט לכיש 15:57–17:12`],
+ ['lachish','100 Objects #22',[['YouTube חלק 1','pNuunfQZd9E',0],['YouTube חלק 2','VcqdUTWd-vU',0]],`כל הפרק (בשני חלקים)`],
+ ['alexander','אלכסנדר הגדול',[["YouTube חלק ג'",'4tjs9OGIEeQ',1807],["YouTube חלק ה'",'fh3zMSOXdI0',1961]],`חלק ג': סיווה ו"בן אמון" 30:07–32:50 · חלק ה': דניאל ואנטיוכוס מ-32:41`],
+ ['alexander','הפודקאסט של התנ"ך',[['YouTube','dCV5wc7PhqE',461]],`אנטיוכוס הרביעי מ-7:41 · מטבע לא מוזכר`],
+ ['lletters','הכתב והכתיבה',[['YouTube','pwOilTX0YnQ',2000]],`חרסי לכיש 33:20–33:34, ואחריהם ערד`],
+ ['standard','100 Objects #12',[['YouTube','A4Xr4BQBBeA',123]],`הדגל מ-2:03`],
+ ['game',"Curator's Corner",[],`מ-1:52`,112],
+ ['flood','Oriental Institute',[],`סיפור הלוח מ-1:23`,83],
+ ['flood','The Epic of Gilgamesh',[['YouTube','H15eydVtHcM',1812]],`המבול 30:12–36:30 · ג'ורג' סמית 4:52 ו-34:11`],
+ ['flood','המבול (שחר ענבר, 2020)',[['YouTube','NXPRaJaukvA',907]],`מקבילה קצרה לגילגמש 15:07 · המיתוסים המסופוטמיים שוב מ-58:04`],
+ ['flood','המבול הבבלי',[['YouTube','pqdxJ3VNjSY',593]],`ג'ורג' סמית 9:53–11:40 · ספריית אשורבניפל מ-8:06`],
+ ['flood','מגדל בבל',[['YouTube','eCRdapKB_H4',908]],`הזיגורת של בבל מ-15:08 · לוח המבול לא נדון`],
+ ['belshazzar','ספר דניאל',[['YouTube','phQj6AnjwVY',2027]],`משתה בלשאצר 33:47 · בלשאצר ההיסטורי 38:51`],
+ ['cyrus','TED',[],`כל ההרצאה (מ-0:35)`,35],
+ ['mummies','100 Objects #1',[['YouTube','nbFAi-jj4xE',184]],`המומיה מ-3:04`]
+];
+YT.forEach(([k,c,links,at,t])=>{const p=(PODS[k]||[]).find(p=>(p.show+' '+p.ep).includes(c));if(!p){console.warn('YT mismatch',k,c);return}
+ p.listen=[...links.map(([lb,id,s])=>[lb,'https://www.youtube.com/watch?v='+id,s]),...p.listen];p.at=at;if(t!=null)p.ytT=t;});
+
 /* episodes that also discuss other objects: reuse them there, at that object's moment */
 {const dir=PODS.lachish.find(p=>p.ep.includes('גירסת הבמאי')), dig=PODS.lachish.find(p=>p.show.includes('Digging'));
- PODS.taylor=[{...dir,t:420,at:`מנסרת סנחריב בערך 7:00 (הערכה)`,cue:`"סנחריב השאיר כתובת מאוד מפורטת"`,trq:'סנחריב השאיר כתובת מאוד מפורטת'},{...dig,ytT:562,at:`הפלישה ליהודה והמנסרות מ-9:22`}];
+ const ed=PODS.lachish.find(p=>p.ep.includes('גירסת העורך')), yAt=(p,s)=>p.listen.map(l=>/youtube/.test(l[1])?[l[0],l[1],s]:l);
+ PODS.taylor=[{...ed,listen:yAt(ed,2928),t:null,at:`מנסרת סנחריב 48:48–55:41`},{...dir,listen:dir.listen.filter(l=>!/youtube/.test(l[1])),t:420,at:`מנסרת סנחריב בערך 7:00 ב-Spreaker (הערכה)`,cue:`"סנחריב השאיר כתובת מאוד מפורטת"`,trq:'סנחריב השאיר כתובת מאוד מפורטת'},{...dig,ytT:562,at:`הפלישה ליהודה והמנסרות מ-9:22`}];
  PODS.nineveh=[{...dig}];
- PODS.kurkh=[{...PODS.obelisk[0]}];}
+ PODS.kurkh=[{...PODS.obelisk[0],listen:yAt(PODS.obelisk[0],2096),at:`מונוליט כורח מ-34:56`}];}
 
 /* stops: rooms on the schematic, items in walking order */
 const STOPS={
@@ -658,7 +688,7 @@ function spotifyUrl(p){
 const heUrl=u=>'https://translate.google.com/translate?sl=en&tl=iw&u='+encodeURIComponent(u);
 const fmt=t=>{const h=Math.floor(t/3600),m=Math.floor(t%3600/60),x=String(t%60).padStart(2,'0');return h?`${h}:${String(m).padStart(2,'0')}:${x}`:`${m}:${x}`};
 const frag=q=>'#:~:text='+encodeURIComponent(q).replace(/-/g,'%2D');
-const withYt=(u,p)=>p.ytT&&/youtube\.com\/watch/.test(u)?`${u}&t=${p.ytT}s`:u;
+const ytSec=(l,p)=>/youtube\.com\/watch/.test(l[1])?(l[2]!=null?l[2]:(p.ytT!=null?p.ytT:null)):null;
 function podHtml(p){
   const sp=(prefs.spotify||!shownListen(p).length)?spotifyUrl(p):null, heTr=p.tr&&p.l==='EN'?heUrl(p.tr[1]):null;
   return `<div class="pod">
@@ -667,7 +697,7 @@ function podHtml(p){
     ${p.cue?`<div class="bible"><b>להקשיב למשפט:</b> ${esc(p.cue)}</div>`:''}
     <p>${esc(p.sum)}</p>
     ${p.more&&p.more.length?`<details class="more"><summary>תקציר מורחב</summary><ul>${p.more.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${p.src?`<div class="src">מקור התקציר: ${esc(p.src)}</div>`:''}</details>`:''}
-    <div class="links">${shownListen(p).map(([lb,u])=>{const yt=p.ytT&&/youtube\.com\/watch/.test(u);return `<a class="lk pri" href="${esc(withYt(u,p))}" target="_blank" rel="noopener">${I.play}<span dir="auto">${esc(lb)}${yt?` · מ-${fmt(p.ytT)}`:''}</span></a>`}).join('')}${sp?`<a class="lk pri" href="${esc(sp)}" target="_blank" rel="noopener">${I.play}<span>Spotify${p.t?` · מ-${fmt(p.t)}`:''}</span></a>`:''}${p.tr?`<a class="lk" href="${esc(p.tr[1]+(p.trq?frag(p.trq):''))}" target="_blank" rel="noopener">${I.doc}תמלול ${esc(p.tr[0])}${p.trq?' · לקטע':''}</a>`:''}${heTr?`<a class="lk" href="${esc(heTr)}" target="_blank" rel="noopener">${I.doc}תמלול בעברית</a>`:''}</div>
+    <div class="links">${shownListen(p).map(l=>{const sec=ytSec(l,p);return `<a class="lk pri${/youtube/.test(l[1])?' yt':''}" href="${esc(sec?`${l[1]}&t=${sec}s`:l[1])}" target="_blank" rel="noopener">${I.play}<span dir="auto">${esc(l[0])}${sec?` · מ-${fmt(sec)}`:''}</span></a>`}).join('')}${sp?`<a class="lk pri" href="${esc(sp)}" target="_blank" rel="noopener">${I.play}<span>Spotify${p.t?` · מ-${fmt(p.t)}`:''}</span></a>`:''}${p.tr?`<a class="lk" href="${esc(p.tr[1]+(p.trq?frag(p.trq):''))}" target="_blank" rel="noopener">${I.doc}תמלול ${esc(p.tr[0])}${p.trq?' · לקטע':''}</a>`:''}${heTr?`<a class="lk" href="${esc(heTr)}" target="_blank" rel="noopener">${I.doc}תמלול בעברית</a>`:''}</div>
   </div>`;
 }
 
