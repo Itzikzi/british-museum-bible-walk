@@ -1,0 +1,666 @@
+<title>מסלול מקראי במוזיאון הבריטי</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#e9e4d8">
+<script>document.documentElement.lang="he";document.documentElement.dir="rtl";</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@500;700&display=swap">
+<style>
+/* Layout: one column, sticky glass header, map card, route list, floating "next" capsule, glass bottom sheet per stop.
+   Palette from the Standard of Ur: lapis, shell, carnelian, gold over limestone. */
+:root{
+  --bg:#ebe6db; --bg2:#ddd6c6;
+  --ink:#1d2333; --ink2:#454c60; --ink3:#5c6276;
+  --lapis:#2445a3; --lapis-soft:rgba(36,69,163,.12);
+  --carnelian:#a83d22; --gold:#85600f; --ok:#1f7a4d; --ok-soft:rgba(31,122,77,.13); --warn-soft:rgba(185,71,42,.13);
+  --glass:rgba(255,255,255,.52); --glass-strong:rgba(255,255,255,.74); --glass-edge:rgba(255,255,255,.75);
+  --glass-hi:rgba(255,255,255,.95); --shadow:rgba(40,45,70,.16); --line:rgba(29,35,51,.10);
+  --room:#cfc6b3; --room-ctx:rgba(29,35,51,.07); --court:rgba(255,255,255,.45);
+  --blob1:rgba(36,69,163,.38); --blob2:rgba(185,71,42,.30); --blob3:rgba(169,123,28,.30);
+  --f-body:"Assistant",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --f-display:"Frank Ruhl Libre","Times New Roman",serif;
+  --r-lg:26px; --r-md:18px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1426; --bg2:#151c33; --ink:#eef0f6; --ink2:#c3c8d8; --ink3:#a0a7bd;
+  --lapis:#8aa6ff; --lapis-soft:rgba(138,166,255,.16); --carnelian:#ff8a6a; --gold:#e3b75a; --ok:#5fd39a; --ok-soft:rgba(95,211,154,.15); --warn-soft:rgba(255,138,106,.16);
+  --glass:rgba(32,40,68,.48); --glass-strong:rgba(30,37,62,.82); --glass-edge:rgba(255,255,255,.14); --glass-hi:rgba(255,255,255,.22);
+  --shadow:rgba(0,0,0,.45); --line:rgba(255,255,255,.10); --room:#3a4566; --room-ctx:rgba(255,255,255,.06); --court:rgba(255,255,255,.05);
+  --blob1:rgba(70,100,220,.45); --blob2:rgba(200,80,50,.28); --blob3:rgba(200,150,50,.22); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1426; --bg2:#151c33; --ink:#eef0f6; --ink2:#c3c8d8; --ink3:#a0a7bd;
+  --lapis:#8aa6ff; --lapis-soft:rgba(138,166,255,.16); --carnelian:#ff8a6a; --gold:#e3b75a; --ok:#5fd39a; --ok-soft:rgba(95,211,154,.15); --warn-soft:rgba(255,138,106,.16);
+  --glass:rgba(32,40,68,.48); --glass-strong:rgba(30,37,62,.82); --glass-edge:rgba(255,255,255,.14); --glass-hi:rgba(255,255,255,.22);
+  --shadow:rgba(0,0,0,.45); --line:rgba(255,255,255,.10); --room:#3a4566; --room-ctx:rgba(255,255,255,.06); --court:rgba(255,255,255,.05);
+  --blob1:rgba(70,100,220,.45); --blob2:rgba(200,80,50,.28); --blob3:rgba(200,150,50,.22); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{direction:rtl;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(40vmax 40vmax at 85% 8%,var(--blob1),transparent 70%),
+             radial-gradient(35vmax 35vmax at 5% 45%,var(--blob2),transparent 70%),
+             radial-gradient(38vmax 38vmax at 70% 95%,var(--blob3),transparent 70%),
+             linear-gradient(180deg,var(--bg),var(--bg2))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--glass-strong)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:var(--lapis)}
+:focus-visible{outline:3px solid var(--lapis);outline-offset:2px;border-radius:10px}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
+  border:1px solid var(--glass-edge);box-shadow:inset 0 1px 0 var(--glass-hi),0 10px 30px -8px var(--shadow)}
+
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 120px;display:flex;flex-direction:column;gap:14px}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));
+  padding:10px max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:10px;border-radius:0 0 22px 22px;border-top:0}
+.top .t{flex:1;min-width:0}
+.top h1{margin:0;font-family:var(--f-display);font-size:1.25rem;line-height:1.15;font-weight:700;text-wrap:balance}
+.top .sub{font-size:.82rem;color:var(--ink2);display:flex;gap:8px;flex-wrap:wrap}
+.iconbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:none}
+.iconbtn svg{width:22px;height:22px}
+
+.seg{display:flex;padding:4px;border-radius:999px;gap:2px}
+.seg button{flex:1;min-height:40px;border-radius:999px;font-weight:600;font-size:.95rem;color:var(--ink2);transition:background .25s,color .25s}
+.seg button[aria-pressed="true"]{background:var(--glass-strong);color:var(--ink);box-shadow:0 2px 10px -2px var(--shadow),inset 0 1px 0 var(--glass-hi)}
+.controls{display:flex;gap:10px;flex-wrap:wrap}
+.controls .seg{flex:1 1 200px;min-width:0}
+
+.alert{border-radius:var(--r-md);padding:10px 14px;display:flex;gap:10px;align-items:flex-start;font-size:.92rem}
+.alert svg{width:20px;height:20px;flex:none;margin-top:2px;color:var(--carnelian)}
+
+.mapcard{border-radius:var(--r-lg);padding:10px;position:relative;overflow:hidden}
+.mapcard svg.map{width:100%;height:auto;display:block;direction:ltr;touch-action:manipulation}
+.maplegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.78rem;color:var(--ink2);padding:4px 6px 2px}
+.maplegend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:5px;vertical-align:-1px}
+.room-ctx{fill:var(--room-ctx)}
+.room-stop{fill:var(--lapis-soft);stroke:var(--lapis);stroke-width:1.6;cursor:pointer;transition:fill .2s}
+.room-stop.done{fill:var(--ok-soft);stroke:var(--ok)}
+.room-stop.closed{stroke-dasharray:4 3}
+.room-stop:hover{fill:rgba(36,69,163,.22)}
+.rnum{font:800 16px var(--f-body);fill:var(--ink2);pointer-events:none;text-anchor:middle;dominant-baseline:central}
+.rlab{font:600 11px var(--f-body);fill:var(--ink3);pointer-events:none;text-anchor:middle}
+.route{fill:none;stroke:var(--gold);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 7;opacity:.95}
+.pin circle{fill:var(--gold);stroke:var(--glass-hi);stroke-width:2}
+.pin.done circle{fill:var(--ok)}
+.pin.next circle{fill:var(--carnelian)}
+.pin text{font:800 14px var(--f-body);fill:#fff;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.pin{cursor:pointer}
+.mapbtns{display:flex;gap:8px;flex-wrap:wrap;padding:6px}
+
+.secttl{display:flex;align-items:center;gap:10px;margin:8px 4px 0;font-weight:700;color:var(--ink2);font-size:.9rem;letter-spacing:.02em}
+.secttl::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.list{display:flex;flex-direction:column;gap:10px}
+.stop{border-radius:var(--r-md);padding:12px 14px;display:flex;gap:12px;align-items:center;text-align:start;width:100%;min-width:0;overflow:hidden;transition:transform .15s}
+.stop:active{transform:scale(.985)}
+.num{width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:800;color:#fff;background:var(--gold);box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+.stop.done .num{background:var(--ok)}
+.stop.next{outline:2px solid var(--carnelian);outline-offset:-2px}
+.stop.next .num{background:var(--carnelian)}
+.stop .body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.stop .row1{display:flex;gap:6px 8px;align-items:baseline;flex-wrap:wrap;min-width:0}
+.stop .room{font-weight:800;font-size:1.02rem}
+.stop .name{font-weight:600;color:var(--ink2);min-width:0}
+.stop .row2{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:.84rem;color:var(--ink3)}
+.stop .peek{font-size:.88rem;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog{flex:none;font-size:.8rem;font-weight:700;color:var(--ink3);font-variant-numeric:tabular-nums}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:1px 9px;border-radius:999px;font-size:.78rem;font-weight:700;line-height:1.6;white-space:nowrap}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.chip.bad{background:var(--warn-soft);color:var(--carnelian)}
+.chip.info{background:var(--lapis-soft);color:var(--lapis)}
+.chip.star{background:rgba(169,123,28,.16);color:var(--gold)}
+.lunch{border-radius:var(--r-md);padding:10px 14px;display:flex;gap:12px;align-items:center;color:var(--ink2);font-size:.92rem;border-style:dashed}
+.lunch svg{width:22px;height:22px;flex:none;color:var(--gold)}
+.walk{font-size:.84rem;color:var(--ink3);padding:0 18px;display:flex;gap:6px;align-items:center}
+
+.fab{position:fixed;z-index:25;inset-inline:0;bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;pointer-events:none;padding:0 max(16px,env(safe-area-inset-left,0px))}
+.fab button{pointer-events:auto;border-radius:999px;min-height:56px;padding:8px 22px 8px 10px;display:flex;align-items:center;gap:10px;max-width:100%;font-weight:700;background:var(--glass-strong)}
+.fab .num{width:40px;height:40px;background:var(--carnelian)}
+.fab .txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2;min-width:0}
+.fab .txt small{font-weight:600;color:var(--ink3);font-size:.75rem}
+.fab .txt span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:62vw}
+
+/* sheet */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(10,14,30,.32);opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;z-index:50;inset-inline:0;bottom:0;margin:0 auto;max-width:760px;height:calc(100% - 40px - env(safe-area-inset-top,0px));
+  border-radius:30px 30px 0 0;border-bottom:0;display:flex;flex-direction:column;transform:translateY(105%);transition:transform .38s cubic-bezier(.2,.9,.25,1);background:var(--glass-strong);
+  -webkit-backdrop-filter:blur(30px) saturate(190%);backdrop-filter:blur(30px) saturate(190%)}
+.sheet.on{transform:none}
+.grab{width:42px;height:5px;border-radius:9px;background:var(--line);margin:8px auto 0;flex:none}
+.sh-head{display:flex;gap:12px;align-items:flex-start;padding:10px max(18px,env(safe-area-inset-left,0px)) 12px;border-bottom:1px solid var(--line);flex:none}
+.sh-head .num{width:44px;height:44px;font-size:1.1rem}
+.sh-head .t{flex:1;min-width:0}
+.sh-head h2{margin:0;font-family:var(--f-display);font-size:1.45rem;line-height:1.15;text-wrap:balance}
+.sh-head .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;font-size:.85rem;color:var(--ink2);align-items:center}
+.sh-body{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:14px max(16px,env(safe-area-inset-left,0px)) 24px;display:flex;flex-direction:column;gap:12px}
+.sh-body>*{flex-shrink:0}
+.way{font-size:.92rem;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border-radius:14px;background:var(--lapis-soft)}
+.way svg{width:18px;height:18px;flex:none;margin-top:3px;color:var(--lapis)}
+.tabs{position:sticky;top:-14px;z-index:2;margin:-14px calc(-1 * max(16px,env(safe-area-inset-left,0px))) 0;padding:10px max(16px,env(safe-area-inset-left,0px));background:var(--glass-strong);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+
+.item{border-radius:var(--r-md);padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;background:var(--glass)}
+.item.seen{opacity:.72}
+.item .hd{display:flex;gap:10px;align-items:flex-start}
+.check{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center;margin:-6px;}
+.check span{width:28px;height:28px;border-radius:50%;border:2px solid var(--ink3);display:grid;place-items:center;transition:all .2s}
+.check svg{width:16px;height:16px;opacity:0;color:#fff}
+.check[aria-checked="true"] span{background:var(--ok);border-color:var(--ok)}
+.check[aria-checked="true"] svg{opacity:1}
+.item h3{margin:0;font-size:1.08rem;line-height:1.3;font-weight:800}
+.item .hd .t{flex:1;min-width:0}
+.item .sub{font-size:.84rem;color:var(--ink3);display:flex;flex-wrap:wrap;gap:4px 8px;margin-top:2px}
+.item p{margin:0;color:var(--ink);font-size:.97rem}
+.bible{font-size:.9rem;color:var(--ink2)}
+.bible b{color:var(--gold);font-weight:800}
+.links{display:flex;flex-wrap:wrap;gap:6px}
+.lk{display:inline-flex;align-items:center;gap:5px;min-height:36px;padding:4px 12px;border-radius:999px;font-size:.86rem;font-weight:700;text-decoration:none;color:var(--lapis);background:var(--lapis-soft);max-width:100%}
+.lk svg{width:14px;height:14px;flex:none}
+.lk.pri{background:var(--lapis);color:#fff}
+:root[data-theme="dark"] .lk.pri{color:#0f1426}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lk.pri{color:#0f1426}}
+
+.pod{border-radius:var(--r-md);padding:12px 14px;display:flex;flex-direction:column;gap:6px;background:var(--glass);min-width:0;overflow:hidden}
+.pod .hd{display:flex;gap:8px;align-items:flex-start}
+.lang{flex:none;font-size:.72rem;font-weight:800;padding:2px 7px;border-radius:6px;background:var(--ink);color:var(--bg);margin-top:3px;letter-spacing:.04em}
+.pod .ttl{font-weight:800;min-width:0;line-height:1.35}
+.pod .ttl .ep{font-weight:600;color:var(--ink2)}
+.pod .m{display:flex;flex-wrap:wrap;gap:6px;font-size:.82rem;color:var(--ink3)}
+.pod p{margin:0;font-size:.93rem;color:var(--ink2)}
+.empty{font-size:.9rem;color:var(--ink3);padding:4px 4px}
+.h4{font-weight:800;font-size:.95rem;color:var(--ink2);margin:6px 2px 0;display:flex;align-items:center;gap:8px}
+.h4 svg{width:18px;height:18px;color:var(--gold)}
+
+.sh-foot{flex:none;display:flex;gap:10px;padding:10px max(16px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.sh-foot button{flex:1;min-height:52px;border-radius:999px;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;padding:4px 10px;min-width:0}
+.sh-foot button small{font-weight:600;color:var(--ink3);font-size:.75rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.sh-foot .nx{background:var(--lapis);color:#fff}
+.sh-foot .nx small{color:rgba(255,255,255,.8)}
+:root[data-theme="dark"] .sh-foot .nx,:root[data-theme="dark"] .sh-foot .nx small{color:#0f1426}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sh-foot .nx,:root:not([data-theme="light"]) .sh-foot .nx small{color:#0f1426}}
+.sh-foot button:disabled{opacity:.35}
+
+/* info */
+.info h3{font-family:var(--f-display);font-size:1.15rem;margin:8px 0 0}
+.info p,.info li{font-size:.95rem;color:var(--ink2)}
+.info ul{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:4px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.93rem}
+.kv dt{font-weight:800;color:var(--ink)}
+.kv dd{margin:0;color:var(--ink2);min-width:0}
+.tbl{overflow-x:auto;border-radius:14px;background:var(--glass)}
+.tbl table{border-collapse:collapse;font-size:.86rem;min-width:520px;width:100%}
+.tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
+.tbl th{font-weight:800;color:var(--ink2)}
+.foot-note{font-size:.8rem;color:var(--ink3);text-align:center;padding:8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap" id="app">
+  <header class="top glass">
+    <div class="t">
+      <h1>המוזיאון הבריטי</h1>
+      <div class="sub"><span>מסלול מקראי</span><span id="clock"></span></div>
+    </div>
+    <button class="iconbtn glass" id="infoBtn" aria-label="מידע מעשי, רקע ופלייליסט">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.01"/></svg>
+    </button>
+  </header>
+
+  <div id="alert"></div>
+
+  <div class="controls">
+    <div class="seg glass" role="group" aria-label="מסלול">
+      <button id="rt-full" aria-pressed="true">יום מלא 10:00–17:00</button>
+      <button id="rt-short" aria-pressed="false">3 שעות 11:00–14:00</button>
+    </div>
+  </div>
+
+  <section class="mapcard glass" aria-label="מפת הקומה">
+    <div class="seg" role="group" aria-label="קומה" style="margin-bottom:8px;background:var(--room-ctx)">
+      <button id="fl-0" aria-pressed="true">קומת קרקע</button>
+      <button id="fl-1" aria-pressed="false">קומה עליונה</button>
+    </div>
+    <svg class="map" id="map" role="img" aria-label="תכנית סכמטית של הקומה"></svg>
+    <div class="maplegend">
+      <span><i style="background:var(--carnelian)"></i>הבא בתור</span>
+      <span><i style="background:var(--gold)"></i>תחנה במסלול</span>
+      <span><i style="background:var(--ok)"></i>נראה</span>
+      <span>מקווקו = שעות מוגבלות</span>
+    </div>
+    <div class="mapbtns">
+      <a class="lk" href="https://www.britishmuseum.org/sites/default/files/2026-05/British_Museum_map.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>המפה הרשמית (PDF)</a>
+      <span class="chip info" style="align-self:center">תכנית סכמטית, לא בקנה מידה</span>
+    </div>
+  </section>
+
+  <div class="secttl" id="progTtl">המסלול</div>
+  <div class="list" id="list"></div>
+  <p class="foot-note">שעות החדרים לפי מפת המוזיאון 03/2026. לבדוק ביום הביקור בעמוד <a href="https://www.britishmuseum.org/visit" target="_blank" rel="noopener">Visit</a>.</p>
+</div>
+
+<div class="fab"><button class="glass" id="fab" hidden></button></div>
+
+<div class="scrim" id="scrim"></div>
+<section class="sheet glass" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shTitle" hidden>
+  <div class="grab"></div>
+  <div class="sh-head">
+    <div id="shNum"></div>
+    <div class="t"><h2 id="shTitle"></h2><div class="meta" id="shMeta"></div></div>
+    <button class="iconbtn" id="shClose" aria-label="סגירה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="sh-body" id="shBody"></div>
+  <div class="sh-foot" id="shFoot"></div>
+</section>
+
+<script>
+/* ---------- icons ---------- */
+const I={
+  ext:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
+  play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
+  doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h9l4 4v14H6zM9 12h7M9 16h7"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  walk:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4.5" r="1.8"/><path d="M10 21l2-6 3 3v3M8 12l2-4 4 1 2 4M12 15l-1-4"/></svg>',
+  head:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="5" height="7" rx="2"/><rect x="16" y="14" width="5" height="7" rx="2"/></svg>',
+  pillar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l9-5 9 5M5 8v11M19 8v11M9.5 8v11M14.5 8v11M3 20h18"/></svg>',
+  food:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 21V3c-2 1-3 4-3 8h3"/></svg>',
+  warn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3 2 20h20L12 3zM12 10v4M12 17v.01"/></svg>'
+};
+
+/* ---------- data (from the visit plan, Nov 2026) ---------- */
+const BM='https://www.britishmuseum.org/collection/object/';
+const W='https://en.wikipedia.org/wiki/';
+
+const ITEMS={
+rosetta:{t:`אבן רוזטה`,sub:[`196 לפנה"ס`,`EA 24`],star:'E',p:`צו של תלמי החמישי בשלושה כתבים: הירוגליפים, דמוטית ויוונית. ההקשר: מצרים התלמית, "מלך הנגב", ותרגום השבעים.`,b:`דניאל יא`,l:[['BM',BM+'Y_EA24'],['Wikipedia',W+'Rosetta_Stone']]},
+ramesses:{t:`פסל רעמסס השני`,sub:[`כ-1250 לפנה"ס`],p:`תעמולה מלכותית מצרית בשיאה. רעמסס הוא אביו של מרנפתח, שבמצבתו מופיע השם "ישראל" (המצבה עצמה בקהיר).`,b:`רקע לשמות א 11`,l:[['Wikipedia',W+'Younger_Memnon']]},
+obelisk:{t:`האובליסק השחור של שלמנאסר השלישי`,sub:[`כ-825 לפנה"ס`,`1848,1104.1`],p:`"יהוא בן עמרי" משתחווה למלך אשור. לפי המוזיאון זו התמונה המוקדמת ביותר ששרדה של ישראלי (כ-841 לפנה"ס). "בית עמרי" הוא הכינוי האשורי לממלכת ישראל.`,b:`מל"ב ט–י`,l:[['BM',BM+'W_1848-1104-1'],['Wikipedia',W+'Black_Obelisk_of_Shalmaneser_III']]},
+balawat:{t:`שערי בלוואת`,sub:[`המאה ה-9 לפנה"ס`],p:`רצועות ברונזה משערי שלמנאסר השלישי. באחת מהן צור שולחת מס בסירות: רקע לאחאב ואיזבל, בת מלך צידונים.`,b:`מל"א טז 31`,l:[['Wikipedia',W+'Balawat_Gates']]},
+lamassu:{t:`למסו של אשורנצירפל השני`,sub:[`חדר 6a`,`כ-865 לפנה"ס`],p:`שומרי השער המכונפים מארמון נמרוד: אריה בעל ראש אדם.`,l:[['BM: אריה',BM+'W_1851-0902-508'],['Wikipedia',W+'Lamassu']]},
+nimrud:{t:`תבליטי נמרוד`,sub:[`חדרים 7–8`,`המאה ה-9 לפנה"ס`],p:`תבליטים מארמון אשורנצירפל השני בנמרוד (כלח): מלחמה, ציד וטקסים. חדר 7 פתוח רק 11:00–15:00; חדר 8 פתוח כל היום.`,b:`בראשית י 11`,l:[]},
+nineveh:{t:`תבליטי נינוה`,sub:[`חדר 9`,`המאה ה-7 לפנה"ס`],p:`תבליטים מארמון סנחריב בנינוה, העיר שאליה נשלח יונה. הקדמה טובה ללכיש.`,b:`יונה א 2; מל"ב יט 36`,l:[]},
+lachish:{t:`תבליטי לכיש`,sub:[`10b`,`700–692 לפנה"ס`,`1856,0909.14`],p:`לוחות מחדר XXXVI בארמון סנחריב בנינוה: סוללת המצור, הקלעים, הגירוש וההוצאה להורג. מעל המלך כתוב ששלל לכיש עובר לפניו.`,b:`מל"ב יח 13–17; יט 8; דה"ב לב 9; ישעיהו לו 1–2; מיכה א 13`,l:[['BM: ההתקפה',BM+'W_1856-0909-14'],['BM: סנחריב על כסאו',BM+'W_1856-0909-14_7'],['Wikipedia',W+'Siege_of_Lachish']]},
+lionhunt:{t:`ציד האריות של אשורבניפל`,sub:[`10a`,`645–635 לפנה"ס`],star:'F',p:`שיא האמנות האשורית. אשורבניפל ("אסנפר", לפי הזיהוי המקובל) הוא גם בעל הספרייה שבה נמצא לוח המבול.`,b:`עזרא ד 10`,l:[['BM',BM+'W_1856-0909-48_8'],['Wikipedia',W+'Lion_Hunt_of_Ashurbanipal']]},
+khorsabad:{t:`שוורי חורסבאד של סרגון השני`,sub:[`10c`,`כ-710 לפנה"ס`],p:`שוורים מכונפים מבירת סרגון. סרגון מוזכר בשמו רק בישעיהו כ 1; הוא השלים את כיבוש שומרון.`,b:`ישעיהו כ 1; מל"ב יז 6`,l:[['BM: שור',BM+'W_1850-1228-4'],['Wikipedia',W+'Lamassu']]},
+mausoleum:{t:`המאוזוליאון של הליקרנסוס`,sub:[`חדר 21`],p:`פסלים מקבר מאוסולוס, מושל פרסי באסיה הקטנה. אמנות בשולי האימפריה הפרסית.`,l:[]},
+alexander:{t:`עולמו של אלכסנדר`,sub:[`חדר 22`],p:`אלכסנדר ויורשיו, "התיש" בחזון דניאל. מטבע של אנטיוכוס הרביעי: לא אומת שמוצג.`,warn:1,b:`דניאל ח 5–8, 21; מקבים א א 1–9`,l:[['Antiochus IV',W+'Antiochus_IV_Epiphanes']]},
+ephesus:{t:`תוף עמוד ממקדש ארטמיס באפסוס`,sub:[`חדר 22`],warn:1,p:`"גדולה ארטמיס של האפסים": המהומה נגד פאולוס.`,b:`מה"ש יט 28, 34`,l:[['BM',BM+'G_1872-0803-9']]},
+nereid:{t:`אנדרטת הנראידות`,sub:[`חדר 17`],p:`קבר בצורת מקדש יווני מקסנתוס שבליקיה, לשליט מקומי תחת פרס.`,l:[]},
+parthenon:{t:`פסלי הפרתנון`,sub:[`חדר 18`],star:'G',p:`אתונה הקלאסית. פאולוס נאם באתונה בגבעת אראופגוס, למרגלות האקרופוליס.`,b:`מה"ש יז 16–34`,l:[]},
+levant:{t:`פיניקיה, כנען ופלשת`,sub:[`חדרים 58–59`],warn:1,p:`גלריית הלבנט הקדום. המוזיאון הוא המוזיאון העיקרי לממצאי לכיש.`,l:[]},
+ivories:{t:`שנהבי נמרוד`,sub:[`חדרים 57–58`],warn:1,p:`עבודה פיניקית שנמצאה בנמרוד. השוו "בית השן" של אחאב ו"מטות שן" בעמוס.`,b:`מל"א כב 39; עמוס ו 4`,l:[['Wikipedia',W+'Nimrud_ivories']]},
+lletters:{t:`מכתבי לכיש`,sub:[`חדר 57`,`כ-588–586 לפנה"ס`],p:`חרסים בעברית מימי המצור הבבלי. מכתב 4: "לא נראה את עזקה". מכתב 3 מזכיר "הנבא".`,b:`ירמיהו לד 7`,l:[['Wikipedia',W+'Lachish_letters']]},
+steward:{t:`"אשר על הבית"`,sub:[`חדר 57`,`סוף המאה ה-8 לפנה"ס`,`1871,1107.1`],p:`משקוף קבר מכפר השילוח. מזוהה בזהירות עם שבנא מימי חזקיהו.`,b:`ישעיהו כב 15–16`,l:[['BM',BM+'W_1871-1107-1'],['Wikipedia',W+'Royal_Steward_inscription']]},
+ram:{t:`האיל בסבך`,sub:[`כ-2600–2400 לפנה"ס`],p:`את השם "Ram in a Thicket" נתן וולי בהשראת עקדת יצחק, אבל אין קשר ישיר.`,b:`בראשית כב 13`,l:[['BM',BM+'W_1929-1017-1']]},
+standard:{t:`דגל אור`,sub:[`כ-2500 לפנה"ס`],p:`צד "מלחמה" וצד "שלום" מלפיס לזולי, צדף ואבן גיר אדומה. "אור כשדים", עירו של אברהם.`,b:`בראשית יא 28, 31`,l:[['BM',BM+'W_1928-1010-3']]},
+game:{t:`המשחק המלכותי של אור`,sub:[`כ-2500 לפנה"ס`],p:`לוח משחק שחוקיו שוחזרו מלוח בכתב יתדות מאוחר.`,l:[['BM',BM+'W_1928-1009-379-h']]},
+flood:{t:`לוח המבול (גילגמש XI)`,sub:[`K.3375`,`המאה ה-7 לפנה"ס`],p:`אותנפישתים בונה ספינה ושולח יונה, סנונית ועורב. ג'ורג' סמית פענח ב-1872. אטרחסיס הוא הגרסה הקדומה יותר.`,b:`בראשית ו–ט, במיוחד ח 6–12`,l:[['BM',BM+'W_K-3375'],['Gilgamesh flood myth',W+'Gilgamesh_flood_myth'],['Atra-Hasis',W+'Atra-Hasis']]},
+taylor:{t:`מנסרת טיילור`,sub:[`691 לפנה"ס`,`1855,1003.1`],warn:1,p:`שמונת מסעות סנחריב: 46 ערים ביהודה נכבשו, וחזקיהו ננעל בירושלים "כציפור בכלוב". הטקסט אינו טוען שירושלים נכבשה.`,b:`מל"ב יח 13–16; יט 35–36; ישעיהו לו–לז`,l:[['BM',BM+'W_1855-1003-1'],['Wikipedia',W+'Sennacherib%27s_Annals']]},
+chronicle:{t:`כרוניקת נבוכדנאצר (ABC 5)`,sub:[`BM 21946`],p:`לוח קטן (כ-8 ס"מ) שמתעד את כרכמיש ואת כיבוש "עיר יהודה" ב-2 באדר, 15/16 במרץ 597 לפנה"ס.`,b:`מל"ב כד 10–17; ירמיהו מו 2`,l:[['Wikipedia',W+'Nebuchadnezzar_Chronicle'],['CoJS','https://cojs.org/the_babylonian_chronicle_-chronicle_5-_nebuchadnezzar_besieges_jerusalem-_597_bce/']]},
+belshazzar:{t:`נבונאיד ובלשאצר`,sub:[`BM 35382`,`BM 91128`],warn:1,p:`הגליל מתפלל לשלום "בל-שר-אוצר, בני הבכור"; הכרוניקה מתארת את נפילת בבל ב-539. מסביר את "השליש במלכות".`,b:`דניאל ה 7, 16, 29`,l:[['Nabonidus Chronicle',W+'Nabonidus_Chronicle'],['Cylinders',W+'Cylinders_of_Nabonidus']]},
+cyrus:{t:`גליל כורש`,sub:[`אחרי 539 לפנה"ס`,`1880,0617.1941`],p:`כורש מתאר כיבוש של בבל בלי קרב והחזרת גולים ואלים. יהודה אינה מוזכרת; זו תעמולה בבלית, לא "מגילת זכויות אדם".`,b:`עזרא א 1–4; דה"ב לו 22–23; ישעיהו מד 28; מה 1`,l:[['BM',BM+'W_1880-0617-1941'],['Wikipedia',W+'Cyrus_Cylinder']]},
+oxus:{t:`אוצר אוקסוס, פרספוליס וחותם דריווש`,sub:[`חדר 52`],star:'J',p:`עולמם של אסתר ונחמיה. דריווש אישר את בניית הבית השני.`,b:`אסתר א 6–7; נחמיה א 11; עזרא ו`,l:[['BM: מרכבה',BM+'W_1897-1231-7'],['BM: פקיד פרסי',BM+'W_1861-0524-6'],['BM: חותם דריווש',BM+'W_1835-0630-1']]},
+hinton:{t:`מדליון הינטון סנט מרי`,sub:[`המאה ה-4`],p:`ראש עם סמל כי-רו: אחד הדימויים הקדומים של ישו, מבריטניה הרומית.`,l:[['Wikipedia',W+'Hinton_St_Mary_Mosaic']]},
+money:{t:`מטבעות: מצור ועד בר כוכבא`,sub:[`חדר 68`],p:`שקלי צור (שולחני הכספים), מטבע אגריפס הראשון, שקל המרד הגדול, ססטרטיוס "IVDAEA CAPTA" של אספסיאנוס ומטבע בר כוכבא. "דינר המס": לא אומת.`,b:`מתי כא 12; כב 19–21`,l:[['עמוד הגלריה','https://www.britishmuseum.org/collection/galleries/money'],['PDF טקסט מוגדל','https://www.britishmuseum.org/sites/default/files/2021-05/Money_Gallery_LPG_2020_Room_68.pdf']]},
+roman:{t:`האימפריה הרומית`,sub:[`חדר 70`],p:`פורטרטים של קיסרים, ביניהם אוגוסטוס, וגביע וורן. שער טיטוס נמצא ברומא; אבן פילטוס במוזיאון ישראל.`,b:`לוקס ב 1`,l:[]},
+mummies:{t:`מצרים: חיים ומוות, מומיות`,sub:[`חדרים 61–63`],p:`אסמים, חניטה ולבנים כרקע תרבותי בלבד לסיפורי יוסף והשעבוד. יציקה מקבר מרנפתח נמצאת במדרגות המזרחיות.`,b:`בראשית מא; נ; שמות ה`,l:[['Merneptah Stele',W+'Merneptah_Stele']]},
+holythorn:{t:`תשמיש הקודש של הקוץ הקדוש`,sub:[`חדר 2a`,`כ-1390`],star:'A',p:`שכיית חמדה מזהב ואבנים טובות שנבנתה סביב קוץ אחד מכתר הקוצים, לפי המסורת. סצנת יום הדין, מאוסף ואדסדון.`,b:`מתי כז 29; יוחנן יט 2`,l:[['Wikipedia',W+'Holy_Thorn_Reliquary']]},
+hoa:{t:`הואה הקאנאיי (Hoa Hakananai'a)`,sub:[`חדר 24`,`Rapa Nui`],star:'D',p:`פסל אבן ענק של אב קדמון מאי הפסחא. לא מקראי, אבל מהפריטים החשובים במוזיאון.`,l:[['Wikipedia',W+'Hoa_Hakananai%27a']]},
+tang:{t:`פסלי הקבר משושלת טאנג`,sub:[`חדר 33`,`המאה ה-8`],star:'B',p:`פסלי קרמיקה מקבר של גנרל סיני: שומרים, סוסים ופקידים שליוו אותו לעולם הבא.`,l:[]},
+shiva:{t:`שיווה נטראג'ה, אדון הריקוד`,sub:[`חדר 33`,`דרום הודו`],star:'C',p:`פסל ברונזה של שיווה רוקד בתוך טבעת אש: בריאה והרס במעגל.`,l:[['Wikipedia',W+'Nataraja']]},
+lewis:{t:`כלי השחמט מלואיס`,sub:[`חדר 40`,`המאה ה-12`],star:'H',p:`ערכת השחמט המפורסמת בעולם, משנהב וולרוס, כנראה מנורווגיה. מלכים, מלכות, בישופים ולוחמים נושכי מגן.`,l:[['Wikipedia',W+'Lewis_chessmen']]},
+astrolabe:{t:`אסטרולב`,sub:[`חדר 42`],star:'I',p:`כלי מדעי מהעולם האסלאמי למדידת גובה הכוכבים, השעה וכיוון התפילה.`,l:[['Wikipedia',W+'Astrolabe']]},
+portland:{t:`כד פורטלנד`,sub:[`חדר 70`,`כ-15 לפנה"ס – 25 לסה"נ`],star:'K',p:`כד זכוכית קמאו רומי מימי אוגוסטוס, ההשראה של וג'ווד. בן זמנו של ישו.`,l:[['Wikipedia',W+'Portland_Vase']]},
+enlight:{t:`Enlightenment ועותק מגע של אבן רוזטה`,sub:[`חדר 1`],p:`איך אספו וסיווגו את העולם במאה ה-18. אפשר לגעת בעותק של אבן רוזטה.`,l:[]}
+};
+
+const P=(l,show,ep,len,listen,tr,at,sum)=>({l,show,ep,len,listen,tr,at,sum});
+const BBC_T='http://www.bbc.co.uk/ahistoryoftheworld/about/transcripts/episode';
+const PODS={
+rosetta:[
+ P('EN','100 Objects #33','The Rosetta Stone','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sbrz3']],['רשמי ⚠️',BBC_T+'33/'],'כל הפרק','מקגרגור מציג צו כוהנים בירוקרטי, וטוען שדווקא הבנאליות שלו הפכה אותו למפתח לפענוח. נוגע גם במאבק הבריטי-צרפתי על האבן.'),
+ P('EN','In Our Time','The Rosetta Stone','47 דק\'',[['Podbay','https://podbay.fm/p/in-our-time/e/1613038500']],null,'','דיון אקדמי על הגילוי ב-1799, שלושת הכתבים, ותרומתם של יאנג ושמפוליון.'),
+ P('HE','עושים היסטוריה #351','נפוליאון במזה"ת, חלק ה\' – אבן הרוזטה','50 דק\'',[['Spreaker','https://www.spreaker.com/episode/wsym-hystwryh-351-npwly-wn-bmzh-t-hlq-h-w-hrwn-bn-hrwzth--44475258']],null,'החצי השני','איך עבודות ביצור חשפו את האבן, שהפכה למורשת החשובה ביותר של המסע.'),
+ P('HE','יחידים במינם #79–80','שמפוליון','',[['חלק א\'','https://niv-goldstein.com/2022/04/21/%D7%A4%D7%A8%D7%A7-%D7%9E%D7%A1%D7%A4%D7%A8-79-%D7%96%D7%90%D7%9F-%D7%A4%D7%A8%D7%A0%D7%A1%D7%95%D7%90%D7%94-%D7%A9%D7%9E%D7%A4%D7%95%D7%9C%D7%99%D7%95%D7%9F-%D7%94%D7%90%D7%99%D7%A9-%D7%A9%D7%A4/'],['חלק ב\' (YouTube)','https://www.youtube.com/watch?v=O62KvAXkSuA']],null,'','ביוגרפיה של מפענח ההירוגליפים, כולל המחלוקות סביב הפענוח.')],
+ramesses:[P('EN','100 Objects #20','Statue of Ramesses II','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qg5mk']],['רשמי ⚠️',BBC_T+'20/'],'כל הפרק','תעמולה מלכותית מצרית בשיאה. רקע למרנפתח, בנו ויורשו.')],
+obelisk:[
+ P('HE','עושים תנ"ך','סדרת אחאב, איזבל ומרד יהוא (בעז סתוי) ⚠️','',[['דף התוכנית','https://podcastaddict.com/podcast/2032693']],null,'','הרקע המקראי לאחאב וליהוא.'),
+ P('EN','Biblical Archaeology Today','Black Obelisk / King Jehu','',[['אינדקס ⚠️','https://www.listennotes.com/top-podcasts/black-obelisk/']],null,'','פרקים קצרים בגישה דתית, עם קריאה בטקסט האובליסק. לא מקור אקדמי.')],
+lachish:[
+ P('EN','100 Objects #21','Lachish Reliefs','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qmb8h']],['רשמי ✅','http://www.bbc.co.uk/programmes/articles/154mNjkBrC9vmm3J3xL1m8p/episode-transcript-episode-21-lachish-reliefs'],'אחרי כדקה','התבליטים כתעמולה ממלכתית שהראתה בארמון את מחיר המרד. המוקד בפליטים המגורשים.'),
+ P('HE','עושים תנ"ך','מסע סנחריב: גירסת העורך (בעז סתוי)','',[['osimhistoria','https://www.osimhistoria.com/osim-tanach/osimtanach_ep71']],null,'','משווה בין המנסרות והתבליטים לספר מלכים, ושואל למה ירושלים לא נכבשה.'),
+ P('HE','עושים תנ"ך','מסע סנחריב: גירסת הבמאי (שחר ענבר)','45 דק\'',[['Apple','https://podcasts.apple.com/au/podcast/%D7%9E%D7%A1%D7%A2-%D7%A1%D7%A0%D7%97%D7%A8%D7%99%D7%91-%D7%92%D7%99%D7%A8%D7%A1%D7%AA-%D7%94%D7%91%D7%9E%D7%90%D7%99-%D7%A9%D7%97%D7%A8-%D7%A2%D7%A0%D7%91%D7%A8-%D7%A2%D7%95%D7%A9%D7%99%D7%9D-%D7%AA%D7%A0-%D7%9A/id1194636676?i=1000715102830'],['Spreaker','https://www.spreaker.com/episode/ms-snhryb-gyrst-hbm-y-shr-nbr-wsym-tn-k--66794813']],['לא רשמי','https://www.podtext.co.il/post/making-a-bible-30-06-2025'],'','הסיפור במלכים ובישעיהו כמה "טייקים" סותרים, והעורך כמי שמעביר מסר תאולוגי.'),
+ P('EN','Histories of the Holy Land #61','Sennacherib\'s Campaign and the Siege of Lachish','32 דק\'',[['Apple','https://podcasts.apple.com/us/podcast/61-sennacheribs-campaign-and-the-siege-of-lachish/id1630517855?i=1000773334212']],null,'','למה סנחריב הקדיש חדר שלם ללכיש ושתק על ירושלים; סוללת המצור והחפירות.'),
+ P('EN','Digging for Truth #178','King Sennacherib (וידאו)','',[['YouTube','https://www.youtube.com/watch?v=yjSucp73Hwk']],null,'','סקירה אפולוגטית-שמרנית של מסע 701. כדאי לשמוע לצד "עושים תנ"ך".'),
+ P('EN','100 Objects #22','Sphinx of Taharqo','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qm8z8']],['רשמי ⚠️',BBC_T+'22/'],'כל הפרק','הפרעונים הכושים, ובהם תרהקה, שנזכר במסע סנחריב (מל"ב יט 9).')],
+lionhunt:[P('EN','The Ancients #576','Ashurbanipal','52 דק\'',[['Apple','https://podcasts.apple.com/gb/podcast/ashurbanipal-the-last-great-king-of-assyria/id1520403988?i=1000722101693'],['Spotify','https://open.spotify.com/episode/1qd4fAD9BwPabIKk7Csfak']],null,'','אשורבניפל ככובש אכזר וכמלומד אספן לוחות. רקע לציד האריות ולספריית נינוה.')],
+alexander:[
+ P('EN','100 Objects #31','Coin with head of Alexander','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sbryz']],['רשמי ⚠️',BBC_T+'31/'],'כל הפרק','יורשי אלכסנדר ניכסו את דמותו המאולהת לצורכי לגיטימציה.'),
+ P('HE','עושים היסטוריה #382–386','אלכסנדר הגדול','',[['חלק ג\'','https://osimhistoria.com/podcast/384-%D7%90%D7%9C%D7%9B%D7%A1%D7%A0%D7%93%D7%A8-%D7%94%D7%92%D7%93%D7%95%D7%9C-%D7%97%D7%9C%D7%A7-%D7%92-%D7%A2%D7%95%D7%A9%D7%99%D7%9D-%D7%94%D7%99%D7%A1%D7%98%D7%95%D7%A8%D7%99%D7%94/'],['חלק ה\'','https://osimhistoria.com/podcast/386-%D7%90%D7%9C%D7%9B%D7%A1%D7%A0%D7%93%D7%A8-%D7%94%D7%92%D7%93%D7%95%D7%9C-%D7%97%D7%9C%D7%A7-%D7%94-%D7%95%D7%90%D7%97%D7%A8%D7%95%D7%9F-%D7%A2%D7%95%D7%A9%D7%99%D7%9D-%D7%94%D7%99%D7%A1%D7%98/']],['טקסט בבלוג ⚠️','https://www.ranlevi.co.il/blog/alexander-the-great'],'','מהכיבושים באסיה הקטנה ועד מותו.'),
+ P('EN','In Our Time','Judas Maccabeus','42 דק\'',[['Apple','https://podcasts.apple.com/gb/podcast/judas-maccabeus/id73330895?i=1000377912771']],null,'','גזירות אנטיוכוס, מרד החשמונאים ויהודה המכבי כגיבור.'),
+ P('HE','הפודקאסט של התנ"ך #56','מרד החשמונאים – הפער בין האגדה למציאות','',[['Apple','https://podcasts.apple.com/us/podcast/56-%D7%9E%D7%A8%D7%93-%D7%94%D7%97%D7%A9%D7%9E%D7%95%D7%A0%D7%90%D7%99%D7%9D-%D7%94%D7%A4%D7%A2%D7%A8-%D7%91%D7%99%D7%9F-%D7%94%D7%90%D7%92%D7%93%D7%94-%D7%9C%D7%9E%D7%A6%D7%99%D7%90%D7%95%D7%AA/id1355374069?i=1000501146959']],null,'','סיפור חנוכה המסורתי מול ספרי המקבים והמחקר.')],
+lletters:[P('HE','עושים תנ"ך','הכתב והכתיבה בישראל הקדום (ישראל פינקלשטיין)','',[['דף התוכנית ⚠️','https://podcastim.org.il/%D7%A2%D7%95%D7%A9%D7%99%D7%9D-%D7%AA%D7%A0%D7%9A/']],null,'','התפשטות הכתיבה בישראל וביהודה; האוסטרקונים מלכיש ומערד הם עדות מרכזית.')],
+standard:[P('EN','100 Objects #12','Standard of Ur','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qb5xv']],['רשמי ⚠️',BBC_T+'12/'],'כל הפרק','צד "מלחמה" וצד "שלום" כחלון לעיר-המדינה הראשונה: צבא, מסים, מלך וחברה מרובדת.'),
+ P('EN','The Ancients','Sargon of Akkad (הוקלט במוזיאון)','43 דק\'',[['Apple','https://podcasts.apple.com/us/podcast/sargon-of-akkad/id1520403988?i=1000683488778']],null,'','רקע לשומר ולאכד, לאולמות 55–56.')],
+game:[P('EN','British Museum','Tom Scott vs Irving Finkel: The Royal Game of Ur','25:33',[['YouTube','https://www.youtube.com/watch?v=WZskjLq040I']],null,'מ-21:40','פינקל, ששחזר את החוקים מלוח בכתב יתדות, משחק ומסביר על הלוח והקוביות.'),
+ P('EN','Curator\'s Corner','Deciphering the world\'s oldest rule book','',[['YouTube ⚠️','https://www.youtube.com/watch?v=wHjznvH54Cw']],null,'','איך לוח בבלי מאוחר אפשר לשחזר את חוקי המשחק.')],
+flood:[
+ P('EN','100 Objects #16','Flood Tablet','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qg5my']],['רשמי ⚠️',BBC_T+'16/'],'כל הפרק','איך ג\'ורג\' סמית זיהה ב-1872 סיפור מבול קדום לנח, ומה המשמעות לקריאת בראשית.'),
+ P('EN','Lex Fridman #487','Irving Finkel','',[['האתר','https://lexfridman.com/irving-finkel/']],['רשמי ✅','https://lexfridman.com/irving-finkel-transcript/'],'1:30:21 מבול · 1:41:44 תיבת נח','פינקל מסביר את "לוח התיבה" הבבלי, שלפיו התיבה הייתה עגולה כמו סירת קורקל.'),
+ P('EN','Oriental Institute','The Ark Before Noah (הרצאה)','',[['YouTube ⚠️','https://www.youtube.com/watch?v=s_fkpZSnz2I']],null,'','איך לוח משפחתי שהובא למוזיאון התברר כהוראות לבניית תיבה.'),
+ P('EN','In Our Time','The Epic of Gilgamesh ⚠️','',[['דף הסדרה','https://www.bbc.co.uk/programmes/b006qykl']],null,'','האפוס מהשירים השומריים ועד הנוסח הבבלי, כולל לוח XI.'),
+ P('HE','עושים תנ"ך','המבול','1:15',[['Spreaker','https://www.spreaker.com/episode/wsym-tn-k-hmbwl--40122441']],null,'','סיפור המבול במקרא ומקבילותיו המסופוטמיות. ההכנה העברית הטובה ביותר לוויטרינה.'),
+ P('HE','עושים תנ"ך','מגדל בבל (יעל אברהמי)','32 דק\'',[['Apple','https://podcasts.apple.com/us/podcast/%D7%A2%D7%95%D7%A9%D7%99%D7%9D-%D7%AA%D7%A0-%D7%9A-%D7%9E%D7%92%D7%93%D7%9C-%D7%91%D7%91%D7%9C/id1194636676?i=1000509126867']],null,'','הזיגורת, העיר בבל וסיפור המגדל על רקע מסופוטמי.')],
+belshazzar:[P('HE','עושים תנ"ך','ספר דניאל (שחר ענבר) ⚠️','',[['דף המרואיין','https://osimhistoria.com/shachar-inbar/']],null,'','הרקע לבלשאצר ולנבונאיד.')],
+cyrus:[
+ P('EN','TED','Neil MacGregor: 2600 years of history in one object','19 דק\'',[['TED','https://www.ted.com/talks/neil_macgregor_2600_years_of_history_in_one_object']],['רשמי ✅','https://www.ted.com/talks/neil_macgregor_2600_years_of_history_in_one_object/transcript'],'כל ההרצאה','"חיי" הגליל: מבבל, דרך עזרא, ועד השאה והרפובליקה האסלאמית.'),
+ P('EN','The Ancients','The Cyrus Cylinder (אירווינג פינקל)','',[['Acast','https://shows.acast.com/the-ancients/episodes/the-cyrus-cylinder']],null,'','הגליל כמסמך יסוד קבור, כיבוש בבל והמורשת הפוליטית.'),
+ P('EN','In Our Time','Cyrus the Great','51 דק\'',[['Deezer','https://www.deezer.com/en/show/699852']],null,'','כורש בין הרודוטוס, קסנופון והתנ"ך, והוויכוח על "מגילת זכויות אדם".'),
+ P('EN','Bible 365 #138','The Cyrus Cylinder and the Fall of Babel','',[['Tikvah','https://ideas.tikvah.org/meirsoloveichik/podcasts/bible-365/episode/the-cyrus-cylinder-and-the-fall-of-babel']],null,'','הגליל לצד נבואות ישעיהו על פרס, מנקודת מבט יהודית-אורתודוקסית.'),
+ P('EN','The History of Persia #8','Fill in the Titles','',[['האתר','https://historyofpersiapodcast.com/2019/04/16/episode-8-fill-in-the-titles/']],null,'','מעבר על טקסט הגליל קטע אחר קטע.')],
+oxus:[
+ P('EN','100 Objects #26','Oxus Chariot Model','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qsvjm']],['רשמי ⚠️',BBC_T+'26/'],'כל הפרק','ניהול האימפריה הפרסית: דרכים, שליחים ומשטר סובלני כלפי עמים כבושים.'),
+ P('EN','100 Objects #25','Gold Coin of Croesus','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00qm8zg']],['רשמי ⚠️',BBC_T+'25/'],'כל הפרק','ראשית המטבע בלידיה, שכורש כבש.')],
+hinton:[P('EN','100 Objects #44','Hinton St Mary Mosaic','~15 דק\'',[['דף הסדרה ⚠️','https://www.bbc.co.uk/programmes/b00nrtd2']],['רשמי ⚠️',BBC_T+'44/'],'כל הפרק','אחד הדימויים הקדומים של ישו, לצד הכי-רו ובלרופון.')],
+money:[P('EN','In Our Time','Josephus ⚠️','',[['דף הסדרה','https://www.bbc.co.uk/programmes/b006qykl']],null,'','יוספוס כמקור העיקרי למרד ולחורבן, שאותם מנציחים מטבעות "יהודה השבויה".')],
+roman:[
+ P('EN','100 Objects #35','Head of Augustus','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sbrz7']],['רשמי ⚠️',BBC_T+'35/'],'כל הפרק','תעמולת הדיוקן הקיסרי, מפתח לקריאת מטבעות אספסיאנוס וטיטוס.'),
+ P('EN','100 Objects #36','The Warren Cup','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00sfgxd']],['רשמי ⚠️',BBC_T+'36/'],'כל הפרק','גביע רומי שנמצא לפי המסורת ליד ירושלים; התרבות הרומית-הלניסטית בארץ במאה ה-1.')],
+mummies:[P('EN','100 Objects #1','Mummy of Hornedjitef','~15 דק\'',[['BBC','https://www.bbc.co.uk/programmes/b00pwmgq']],['רשמי ⚠️',BBC_T+'1/'],'כל הפרק','ארון כוהן תלמיי כחלון לאמונות על החיים שאחרי המוות.')]
+};
+
+/* stops: rooms on the schematic, items in walking order */
+const STOPS={
+r4:{floor:0,rooms:['4'],title:'חדר 4',name:'מצרים: פיסול',items:['rosetta','ramesses'],way:'מהכניסה הראשית לחצר הגדולה (Great Court) ופונים שמאלה. אבן רוזטה באמצע חדר 4, ליד הכניסה מהחצר.'},
+r24:{floor:0,rooms:['24'],title:'חדר 24',name:'חיים ומוות',items:['hoa'],way:'חוזרים לחצר הגדולה וחוצים אותה צפונה. חדר 24 מאחורי חדר הקריאה, בצד הצפוני.'},
+r33:{floor:0,rooms:['33'],title:'חדר 33',name:'סין ודרום אסיה (Level 1)',items:['tang','shiva'],way:'ליד חדר 24 עולים במדרגות הצפוניות (North stairs) ל-Level 1. חדר 33 הוא גלריה ארוכה ממזרח למערב.'},
+r6:{floor:0,rooms:['6'],title:'חדר 6',name:'פיסול אשורי ושערי בלוואת',items:['obelisk','balawat','lamassu'],way:'בקצה הדרומי של חדר 4, לכיוון הכניסה הראשית.'},
+r7:{floor:0,rooms:['7','8'],title:'חדרים 7–8',name:'אשור: נמרוד',items:['nimrud'],limit:['7'],way:'יורדים בחזרה לחצר, מערבה לחדר 4 ודרומה עד חדר 6. משם צפונה לגלריה שמקבילה לחדר 4. חדר 7 נפתח ב-11:00.'},
+r10:{floor:0,rooms:['10'],title:'חדר 10',name:'לכיש, ציד האריות, חורסבאד',items:['lachish','lionhunt','khorsabad'],limit:['10'],way:'מערבה מחדר 7. הסדר בתוך החדר משוער: עקבו אחרי התוויות 10a/10b/10c.'},
+r9:{floor:0,rooms:['9'],title:'חדר 9',name:'אשור: נינוה',items:['nineveh'],limit:['9'],way:'חוזרים לחדר 7–8 וממשיכים צפונה עד הקצה, לחדר 9.'},
+r21:{floor:0,rooms:['21','22','23'],title:'חדרים 21–23',name:'המאוזוליאון ועולמו של אלכסנדר',items:['mausoleum','alexander','ephesus'],way:'מערבה מחדר 9 לחדר 21, ומשם דרומה ל-22 ול-23.'},
+r17:{floor:0,rooms:['17'],title:'חדר 17',name:'אנדרטת הנראידות',items:['nereid'],way:'מערבה מחדר 23.'},
+r18:{floor:0,rooms:['18'],title:'חדר 18',name:'פסלי הפרתנון',items:['parthenon'],way:'ממשיכים מערבה, עד הקצה המערבי של הבניין.'},
+r57:{floor:1,rooms:['59','58','57'],title:'חדרים 57–59',name:'הלבנט הקדום',items:['levant','ivories','lletters','steward'],limit:['57','58'],way:'עולים במדרגות המערביות (West stairs) לקומה 3. חדר 59 בראש המדרגות; ממשיכים מזרחה ל-58 ול-57. חדרים 57–58 פתוחים רק עד 15:00.'},
+r56:{floor:1,rooms:['56'],title:'חדר 56',name:'מסופוטמיה 6000–1500 לפנה"ס: אור',items:['ram','standard','game'],way:'ממשיכים מזרחה מחדר 57.'},
+r55:{floor:1,rooms:['55'],title:'חדר 55',name:'מסופוטמיה 1500–539 לפנה"ס: בבל',items:['flood','taylor','chronicle','belshazzar'],way:'מזרחה מחדר 56.'},
+r52:{floor:1,rooms:['52'],title:'חדר 52',name:'איראן הקדומה: פרס',items:['cyrus','oxus'],way:'מזרחה דרך 54 ו-53, ובפינה פונים דרומה לחדר 52.'},
+r49:{floor:1,rooms:['49'],title:'חדר 49',name:'בריטניה הרומית',items:['hinton'],way:'דרומה לאורך האגף המזרחי, דרך חדרים 51 ו-50.'},
+r42:{floor:1,rooms:['42'],title:'חדר 42',name:'העולם האסלאמי',items:['astrolabe'],way:'מחדר 49 דרומה לחדר 41, ומזרחה לחדר 42.'},
+r40:{floor:1,rooms:['40'],title:'חדר 40',name:'אירופה בימי הביניים',items:['lewis'],way:'חוזרים מערבה דרך חדר 41 לחדר 40.'},
+r68:{floor:1,rooms:['68'],title:'חדר 68',name:'כסף: יהודה השבויה',items:['money'],closed:['68'],way:'מערבה מחדר 40 דרך אזור המדרגות הדרומיות (South stairs) ו-Coffee Lounge, עד חדר 68.'},
+r70:{floor:1,rooms:['70'],title:'חדר 70',name:'האימפריה הרומית',items:['portland','roman'],closed:['70'],way:'מחדר 68 דרך 69 וצפונה לחדר 70.'},
+r61:{floor:1,rooms:['61','62','63'],title:'חדרים 61–63',name:'מצרים: חיים, מוות ומומיות',items:['mummies'],way:'צפונה דרך 71, 72 ו-73 עד חדר 59, ומשם צפונה לחדר 61. מומיות ב-62–63.'},
+r1:{floor:0,rooms:['1'],title:'חדר 1',name:'Enlightenment',items:['enlight'],way:'יורדים במדרגות המערביות, חוצים את החצר הגדולה מזרחה לחדר 1.'},
+r2a:{floor:0,rooms:['2a'],title:'חדר 2a',name:'אוסף ואדסדון',items:['holythorn'],way:'מחדר 1 דרומה דרך חדר 2 לחדר 2a, ליד הכניסה הראשית. סוף המסלול.'}
+};
+
+const ROUTES={
+full:[['r4','10:00',20],['r6','10:20',20],['r24','10:40',10],['r33','10:50',20],['r7','11:10',15],['r10','11:25',40],['r9','12:05',10],['r21','12:15',15],['r17','12:30',10],['r18','12:40',10],
+  {lunch:'12:50',txt:'ארוחת צהריים, 40 דק\'. הכי קרוב: Pizzeria ליד חדר 12. אחר כך חוזרים צפונה למדרגות המערביות.'},
+  ['r57','13:30',30],['r56','14:00',20],['r55','14:20',30],['r52','14:50',25],['r49','15:15',10],['r42','15:25',10],['r40','15:35',10],['r68','15:45',20],['r70','16:05',15],['r61','16:20',20],['r1','16:40',10],['r2a','16:50',10]],
+short:[['r4','11:00',10],['r6','11:10',10],['r7','11:20',5],['r10','11:25',30],['r9','11:55',5],['r57','12:05',20],['r56','12:25',15],['r55','12:40',20],['r52','13:00',15],['r40','13:15',5],['r68','13:20',15],['r70','13:35',10],['r61','13:45',15]]
+};
+
+/* schematic rooms: [id, x, y, w, h] in plan coordinates. Not to scale. */
+const PLAN=[
+ {vb:'385 180 665 860',court:[698,545,264,425],circle:[830,720,66],labels:[[830,850,'Great Court'],[830,1012,'Main entrance ↑'],[632,478,'West stairs'],[450,1000,'Pizzeria'],[757,262,'North stairs'],[470,212,'Level 1']],
+  ctx:[['33b',1018,230,32,270],['30',466,400,270,48],['26',880,455,82,40],['27',968,455,44,40],['20',505,500,38,72],['19',505,576,38,44],['16',515,742,30,48],['15',505,800,38,50],['14',505,856,38,24],['13',505,886,101,52],['12',505,944,101,26],['2',948,880,82,60],['3',870,945,50,25],['29',700,455,80,85]],
+  rooms:{'4':[652,545,40,325],'6':[612,878,80,92],'7':[612,760,33,112],'8':[612,652,33,104],'9':[612,545,33,103],'10':[548,745,58,125],'21':[548,500,58,138],'22':[548,642,58,32],'23':[548,678,58,62],'17':[505,624,38,112],'18':[392,575,105,280],'1':[968,545,42,325],'24':[788,400,85,140],'33':[612,190,438,38],'2a':[968,975,46,56]},
+  pizza:[392,948,124,70]},
+ {vb:'478 398 545 590',court:null,circle:[707,712,76],labels:[[707,612,'Great Court Restaurant'],[505,500,'West stairs'],[909,500,'East stairs'],[620,925,'South stairs']],
+  ctx:[['64',756,460,82,38],['65',845,460,43,38],['66',685,405,45,50],['53',845,505,43,35],['54',812,505,29,35],['51',845,610,43,70],['50',845,685,43,55],['41',828,880,77,70],['43',1010,880,50,130],['46',895,962,108,50],['69',528,880,40,90],['71',528,685,40,55],['72',528,610,40,70],['73',528,545,40,55],['36',575,890,170,52]],
+  rooms:{'59':[528,505,37,35],'58':[569,505,39,35],'57':[612,505,49,35],'56':[665,505,88,35],'55':[757,505,51,35],'52':[845,545,43,60],'49':[845,745,43,130],'68':[575,946,90,26],'70':[528,745,40,128],'61':[528,460,60,38],'62':[592,460,66,38],'63':[662,460,90,38],'40':[750,892,70,52],'42':[912,892,92,50]}}
+];
+
+/* ---------- state ---------- */
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let seen=new Set(LS.get('bm-seen',[]));
+let routeKey=LS.get('bm-route','full');
+let floor=0, openId=null;
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const route=()=>ROUTES[routeKey].filter(r=>!r.lunch);
+const stopDone=id=>STOPS[id].items.every(i=>seen.has(i));
+const stopProg=id=>STOPS[id].items.filter(i=>seen.has(i)).length;
+const nextStop=()=>{const r=route().find(([id])=>!stopDone(id));return r?r[0]:null};
+const routeIdx=id=>route().findIndex(r=>r[0]===id);
+
+/* London time & gallery status (official map 03/2026: rooms 7, 9, 10, 19, 20, 57, 58 open 11:00–15:00) */
+function london(){
+  const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(x=>[x.type,x.value]));
+  return {wd:p.weekday,min:(+p.hour)*60+(+p.minute),hm:p.hour+':'+p.minute,md:p.month+'-'+p.day};
+}
+function museumOpen(L){const close=L.wd==='Fri'?20*60+30:17*60;return L.min>=600&&L.min<close}
+function status(id){
+  const s=STOPS[id],L=london();
+  if(!museumOpen(L)) return null;
+  if(s.closed&&L.wd==='Fri'&&L.min>=17*60) return {cls:'bad',t:'סגור בערב שישי'};
+  if(s.limit){
+    if(L.min<660) return {cls:'bad',t:'נפתח ב-11:00'};
+    if(L.min>=900) return {cls:'bad',t:'נסגר ב-15:00'};
+    const left=900-L.min;
+    return {cls:left<=45?'bad':'ok',t:left<=45?`עוד ${left} דק' לסגירה`:'פתוח עד 15:00'};
+  }
+  if(L.wd==='Fri'&&L.min>=17*60&&(s.floor===0&&['r7','r9','r10','r6'].includes(id))) return {cls:'bad',t:'סגור בערב שישי'};
+  return null;
+}
+function limitChip(id){const s=STOPS[id];return s.limit?`<span class="chip info">חדר ${s.limit.join(', ')}: <span class="ltr">11:00–15:00</span></span>`:''}
+
+/* ---------- render ---------- */
+function renderClock(){
+  const L=london();
+  $('#clock').textContent=`לונדון ${L.hm}${museumOpen(L)?'':' · המוזיאון סגור'}`;
+  const a=[];
+  if(museumOpen(L)&&L.min<900){
+    const ns=route().find(([id])=>STOPS[id].limit&&!stopDone(id));
+    if(ns&&L.min>=780) a.push(`חדרי אשור והלבנט (7, 9, 10, 57, 58) נסגרים ב-15:00. נשארו ${900-L.min} דקות.`);
+  }
+  if(L.wd==='Fri') a.push('יום שישי: בערב סגורים חדרים 25, 68–73, 90–90a, 92–94, וחדרי אשור והלבנט לא פתוחים.');
+  $('#alert').innerHTML=a.map(t=>`<div class="alert glass">${I.warn}<span>${esc(t)}</span></div>`).join('');
+}
+
+function renderMap(){
+  const P=PLAN[floor],svg=$('#map');
+  svg.setAttribute('viewBox',P.vb);
+  const r=route(), nx=nextStop();
+  const roomOwner={};
+  Object.entries(STOPS).forEach(([id,s])=>{if(s.floor===floor)s.rooms.forEach(rm=>roomOwner[rm]=id)});
+  let h='';
+  if(P.court) h+=`<rect x="${P.court[0]}" y="${P.court[1]}" width="${P.court[2]}" height="${P.court[3]}" rx="22" fill="var(--court)" stroke="var(--line)"/>`;
+  h+=`<circle cx="${P.circle[0]}" cy="${P.circle[1]}" r="${P.circle[2]}" fill="var(--court)" stroke="var(--line)" stroke-width="1.5"/>`;
+  if(floor===0) h+=`<text class="rlab" x="${P.circle[0]}" y="${P.circle[1]+4}">Reading Room</text>`;
+  if(P.pizza) h+=`<rect x="${P.pizza[0]}" y="${P.pizza[1]}" width="${P.pizza[2]}" height="${P.pizza[3]}" rx="10" fill="var(--room-ctx)"/>`;
+  P.ctx.forEach(([n,x,y,w,hh])=>{h+=`<rect class="room-ctx" x="${x}" y="${y}" width="${w}" height="${hh}" rx="6"/>`;if(hh>=22)h+=`<text class="rnum" x="${x+w/2}" y="${y+hh/2}" style="opacity:.6">${n}</text>`});
+  Object.entries(P.rooms).forEach(([n,[x,y,w,hh]])=>{
+    const id=roomOwner[n], inRoute=id&&routeIdx(id)>=0;
+    const st=id&&STOPS[id];
+    const cls=['room-stop'];
+    if(id&&stopDone(id))cls.push('done');
+    if(st&&(st.limit||[]).includes(n))cls.push('closed');
+    h+=`<rect class="${cls.join(' ')}" data-stop="${id}" x="${x}" y="${y}" width="${w}" height="${hh}" rx="6" ${inRoute?'':'style="opacity:.45"'}><title>חדר ${n}</title></rect>`;
+    h+=`<text class="rnum" x="${x+w/2}" y="${hh>=60?y+hh/2+8:y+hh/2+6}" style="fill:var(--ink)">${n}</text>`;
+  });
+  P.labels.forEach(([x,y,t])=>h+=`<text class="rlab" x="${x}" y="${y}">${t}</text>`);
+  // route path + pins
+  const pts=[];
+  r.forEach(([id],i)=>{const s=STOPS[id];if(s.floor!==floor)return;const rr=P.rooms[s.rooms[0]];const c=pinPos(rr);pts.push({id,i,c})});
+  for(let k=1;k<pts.length;k++) if(pts[k].i===pts[k-1].i+1) h+=`<line class="route" x1="${pts[k-1].c[0]}" y1="${pts[k-1].c[1]}" x2="${pts[k].c[0]}" y2="${pts[k].c[1]}"/>`;
+  pts.forEach(({id,i,c})=>{const cl=['pin'];if(stopDone(id))cl.push('done');else if(id===nx)cl.push('next');
+    h+=`<g class="${cl.join(' ')}" data-stop="${id}"><circle cx="${c[0]}" cy="${c[1]}" r="14"/><text x="${c[0]}" y="${c[1]}">${i+1}</text></g>`});
+  svg.innerHTML=h;
+}
+function pinPos([x,y,w,h]){return h>=60?[x+w/2,y+20]:[x+w/2,y+2]}
+
+function renderList(){
+  const r=ROUTES[routeKey], nx=nextStop();
+  let h='', lastFloor=null, n=0;
+  const total=route().reduce((a,[id])=>a+STOPS[id].items.length,0), done=route().reduce((a,[id])=>a+stopProg(id),0);
+  $('#progTtl').textContent=`המסלול · ${done}/${total} פריטים נראו`;
+  r.forEach(e=>{
+    if(e.lunch){h+=`<div class="lunch glass">${I.food}<div><b>${e.lunch}</b> · ${esc(e.txt)}</div></div>`;return}
+    const [id,t,m]=e, s=STOPS[id]; n++;
+    if(s.floor!==lastFloor){h+=`<div class="secttl">${s.floor?'קומה עליונה (Level 3)':'קומת קרקע'}</div>`;lastFloor=s.floor}
+    const st=status(id), d=stopDone(id);
+    h+=`<button class="stop glass${d?' done':''}${id===nx?' next':''}" data-stop="${id}">
+      <span class="num">${d?I.check.replace('<svg','<svg width="18" height="18"'):n}</span>
+      <span class="body">
+        <span class="row1"><span class="room">${esc(s.title)}</span><span class="name">${esc(s.name)}</span></span>
+        <span class="row2"><span class="ltr">${t}</span><span>· ${m} דק'</span>${st?`<span class="chip ${st.cls}">${esc(st.t)}</span>`:(s.limit?`<span class="chip info"><span class="ltr">11:00–15:00</span></span>`:'')}${(PODS_COUNT[id]?`<span class="chip info">${PODS_COUNT[id]} האזנות</span>`:'')}</span>
+        <span class="peek">${s.items.map(i=>esc(ITEMS[i].t)).join(' · ')}</span>
+      </span>
+      <span class="prog">${stopProg(id)}/${s.items.length}</span>
+    </button>`;
+  });
+  $('#list').innerHTML=h;
+  const fab=$('#fab');
+  if(nx){const i=routeIdx(nx);fab.hidden=false;fab.innerHTML=`<span class="num">${i+1}</span><span class="txt"><small>הבא בתור · ${route()[i][1]}</small><span>${esc(STOPS[nx].title)} · ${esc(STOPS[nx].name)}</span></span>`;fab.dataset.stop=nx}
+  else{fab.hidden=false;fab.innerHTML=`<span class="num" style="background:var(--ok)">${I.check.replace('<svg','<svg width="18" height="18"')}</span><span class="txt"><small>סיימתם את המסלול</small><span>כל הכבוד</span></span>`;fab.dataset.stop=''}
+}
+const PODS_COUNT={};Object.entries(STOPS).forEach(([id,s])=>PODS_COUNT[id]=s.items.reduce((a,i)=>a+(PODS[i]||[]).length,0));
+
+function linkHtml([label,url],pri){return `<a class="lk${pri?' pri':''}" href="${esc(url)}" target="_blank" rel="noopener"><span dir="auto">${esc(label)}</span>${I.ext}</a>`}
+
+function itemHtml(k){
+  const it=ITEMS[k], on=seen.has(k);
+  return `<article class="item${on?' seen':''}">
+    <div class="hd">
+      <button class="check" role="checkbox" aria-checked="${on}" data-item="${k}" aria-label="ראיתי: ${esc(it.t)}"><span>${I.check}</span></button>
+      <div class="t"><h3>${esc(it.t)}</h3>
+        <div class="sub">${it.sub.map(x=>`<span dir="auto">${esc(x)}</span>`).join('<span>·</span>')}${it.star?`<span class="chip star">Don't miss · ${it.star}</span>`:''}${it.warn?'<span class="chip bad">⚠ מיקום לא אומת</span>':''}</div></div>
+    </div>
+    <p>${esc(it.p)}</p>
+    ${it.b?`<div class="bible"><b>מקרא:</b> ${esc(it.b)}</div>`:''}
+    ${it.l.length?`<div class="links">${it.l.map(l=>linkHtml(l)).join('')}</div>`:''}
+  </article>`;
+}
+function podHtml(p){
+  return `<div class="pod">
+    <div class="hd"><span class="lang">${p.l}</span><div class="ttl" dir="auto">${esc(p.show)} · <span class="ep">${esc(p.ep)}</span></div></div>
+    <div class="m">${p.len?`<span>⏱ <span dir="auto">${esc(p.len)}</span></span>`:''}${p.at?`<span class="chip star">מאיפה: ${esc(p.at)}</span>`:''}</div>
+    <p>${esc(p.sum)}</p>
+    <div class="links">${p.listen.map(([lb,u])=>`<a class="lk pri" href="${esc(u)}" target="_blank" rel="noopener">${I.play}<span dir="auto">${esc(lb)}</span></a>`).join('')}${p.tr?`<a class="lk" href="${esc(p.tr[1])}" target="_blank" rel="noopener">${I.doc}תמלול ${esc(p.tr[0])}</a>`:''}</div>
+  </div>`;
+}
+
+function renderSheet(id){
+  const s=STOPS[id], r=route(), i=routeIdx(id), e=i>=0?r[i]:null, st=status(id), d=stopDone(id);
+  $('#shNum').innerHTML=`<span class="num" style="${d?'background:var(--ok)':(id===nextStop()?'background:var(--carnelian)':'')}">${i>=0?i+1:'–'}</span>`;
+  $('#shTitle').textContent=`${s.title} · ${s.name}`;
+  $('#shMeta').innerHTML=`${e?`<span class="ltr">${e[1]}</span><span>· ${e[2]} דק'</span>`:'<span>לא במסלול הזה</span>'}<span>· ${s.floor?'קומה עליונה':'קומת קרקע'}</span>${st?`<span class="chip ${st.cls}">${esc(st.t)}</span>`:''}${limitChip(id)}`;
+  let h=`<div class="way">${I.walk}<span>${esc(s.way)}</span></div>`;
+  h+=`<div class="h4">${I.pillar}פריטים בחדר (${stopProg(id)}/${s.items.length})</div>`;
+  h+=s.items.map(itemHtml).join('');
+  const pods=s.items.flatMap(k=>(PODS[k]||[]).map(p=>({...p,for:ITEMS[k].t})));
+  h+=`<div class="h4">${I.head}האזנה וקריאה (${pods.length})</div>`;
+  if(pods.length){let last='';pods.forEach(p=>{if(p.for!==last&&s.items.length>1){h+=`<div class="empty">ל${esc(p.for)}:</div>`;last=p.for}h+=podHtml(p)})}
+  else h+=`<div class="empty">לא נמצא פרק ייעודי לחדר הזה. מומלץ לשמוע את פרקי חדר 10 (לכיש).</div>`;
+  $('#shBody').innerHTML=h;
+  const prev=i>0?r[i-1][0]:null, next=i>=0&&i<r.length-1?r[i+1][0]:null;
+  $('#shFoot').innerHTML=`<button class="glass" ${prev?`data-go="${prev}"`:'disabled'}><span>→ הקודם</span><small>${prev?esc(STOPS[prev].title):''}</small></button>
+    <button class="nx" ${next?`data-go="${next}"`:'disabled'}><span>הבא ←</span><small>${next?esc(STOPS[next].title+' · '+STOPS[next].name):'סוף המסלול'}</small></button>`;
+}
+
+function renderInfo(){
+  $('#shNum').innerHTML='';
+  $('#shTitle').textContent='מידע מעשי, רקע ופלייליסט';
+  $('#shMeta').innerHTML='<span>לונדון, 14–22 בנובמבר 2026</span>';
+  $('#shBody').innerHTML=INFO_HTML;
+  $('#shFoot').innerHTML=`<button class="nx" data-close="1"><span>חזרה למפה</span></button>`;
+}
+
+/* ---------- sheet open/close via hash (Android back button closes it) ---------- */
+function openFromHash(){
+  const h=location.hash.slice(1);
+  const sheet=$('#sheet');
+  if(h==='info'||STOPS[h]){
+    openId=h;
+    if(h==='info')renderInfo();else{renderSheet(h);if(STOPS[h].floor!==floor)setFloor(STOPS[h].floor)}
+    sheet.hidden=false;requestAnimationFrame(()=>{sheet.classList.add('on');$('#scrim').classList.add('on')});
+    $('#shBody').scrollTop=0;
+    $('#shClose').focus({preventScroll:true});
+  }else if(openId){
+    openId=null;sheet.classList.remove('on');$('#scrim').classList.remove('on');
+    setTimeout(()=>{if(!openId)sheet.hidden=true},380);
+  }
+}
+const go=id=>{location.hash=id};
+const close=()=>{if(location.hash){history.length>1&&openId?location.hash='':location.hash='';}};
+
+function setFloor(f){floor=f;$('#fl-0').setAttribute('aria-pressed',f===0);$('#fl-1').setAttribute('aria-pressed',f===1);renderMap()}
+function setRoute(k){routeKey=k;LS.set('bm-route',k);$('#rt-full').setAttribute('aria-pressed',k==='full');$('#rt-short').setAttribute('aria-pressed',k==='short');renderAll()}
+function renderAll(){renderClock();renderMap();renderList();if(openId&&openId!=='info')renderSheet(openId)}
+
+document.addEventListener('click',e=>{
+  const c=e.target.closest('[data-item]');
+  if(c){const k=c.dataset.item;seen.has(k)?seen.delete(k):seen.add(k);LS.set('bm-seen',[...seen]);
+    const sc=$('#shBody').scrollTop;renderAll();$('#shBody').scrollTop=sc;return}
+  const g=e.target.closest('[data-go]'); if(g){go(g.dataset.go);return}
+  if(e.target.closest('[data-close]')){close();return}
+  const s=e.target.closest('[data-stop]'); if(s&&s.dataset.stop){go(s.dataset.stop);return}
+});
+$('#scrim').onclick=close; $('#shClose').onclick=close; $('#infoBtn').onclick=()=>go('info');
+$('#fl-0').onclick=()=>setFloor(0); $('#fl-1').onclick=()=>setFloor(1);
+$('#rt-full').onclick=()=>setRoute('full'); $('#rt-short').onclick=()=>setRoute('short');
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&openId)close()});
+window.addEventListener('hashchange',openFromHash);
+// swipe down on the sheet header to close
+(()=>{let y0=null;const hd=$('.sh-head'),gr=$('.grab');[hd,gr].forEach(el=>{el.addEventListener('touchstart',e=>{y0=e.touches[0].clientY},{passive:true});el.addEventListener('touchend',e=>{if(y0!=null&&e.changedTouches[0].clientY-y0>70)close();y0=null})})})();
+
+/* ---------- info content ---------- */
+const INFO_HTML=`<div class="info" style="display:flex;flex-direction:column;gap:12px">
+<h3>שעות וכניסה</h3>
+<dl class="kv">
+<dt>שעות</dt><dd>כל יום 10:00–17:00, כניסה אחרונה 16:45. החצר הגדולה נסגרת ב-17:30.</dd>
+<dt>שישי</dt><dd>עד 20:30. בערב סגורים חדרים 25, 68–73, 90–90a, 92–94, וחדרי אשור והלבנט לא פתוחים.</dd>
+<dt>שעות מוגבלות</dt><dd>לפי מפת המוזיאון 03/2026: חדרים 7, 9, 10, 19, 20 (קרקע) ו-57, 58 (עליונה) פתוחים רק 11:00–15:00.</dd>
+<dt>כניסה</dt><dd>חינם. כדאי להזמין כרטיס חינמי עם שעה: <a href="https://www.britishmuseum.org/visit" target="_blank" rel="noopener">Visit</a>.</dd>
+<dt>כתובת</dt><dd><span class="ltr">Great Russell Street, WC1B 3DG</span>. כניסה צפונית: <span class="ltr">Montague Place</span>.</dd>
+<dt>ביטחון</dt><dd>בדיקת תיקים. מזוודות ותיקים גדולים אסורים.</dd>
+<dt>תחבורה</dt><dd><span class="ltr">Tottenham Court Road, Holborn, Russell Square</span></dd>
+</dl>
+<h3>סגירות בחלון הביקור</h3>
+<ul><li>חדר הקריאה סגור ב-20.11 וב-18.11 אחר הצהריים.</li><li>חדרים 68–73 היו סגורים עד 13.11.</li><li>תערוכות בתשלום: Bayeux Tapestry (אזלו הכרטיסים) ו-Korea. אין תערוכה זמנית על המזרח הקדום.</li></ul>
+<h3>טיפים</h3>
+<ul><li>הקליטה באולמות חלשה: להוריד מראש את הפודקאסטים לאפליקציה.</li><li>אוכל: 12:30 או אחרי 13:45. Pizzeria, Court Café, Great Court Restaurant.</li><li>צילום מותר לשימוש אישי, בלי פלאש וחצובה ⚠️.</li></ul>
+<h3>לשאול בדלפק המידע</h3>
+<ul><li>מכתבי אל-עמארנה (מכתבי עבדי-חבה מירושלים נמצאים בברלין).</li><li>כתובת הפוליטרכים (מה"ש יז 6) – <a href="${BM}G_1877-0511-1" target="_blank" rel="noopener">BM</a>, מוצגת לעתים.</li><li>מונוליט כורח (אחאב, 853 לפנה"ס) – <a href="${W}Kurkh_Monoliths" target="_blank" rel="noopener">Wikipedia</a>.</li><li>לוח נבו-שר-סכים (ירמיהו לט 3) – <a href="${W}Nebo-Sarsekim_Tablet" target="_blank" rel="noopener">Wikipedia</a>.</li><li>יציקות מצבת מישע וכתובת השילוח – <a href="${BM}W_C-219" target="_blank" rel="noopener">BM</a>.</li></ul>
+<h3>כתובות שאינן במוזיאון</h3>
+<div class="tbl"><table><thead><tr><th>כתובת</th><th>תאריך</th><th>שם מקראי</th><th>מיקום</th></tr></thead><tbody>
+<tr><td><a href="${W}Mesha_Stele" target="_blank" rel="noopener">מצבת מישע</a></td><td>כ-840 לפנה"ס</td><td>עמרי, מישע (מל"ב ג)</td><td>הלובר</td></tr>
+<tr><td><a href="${W}Tel_Dan_stele" target="_blank" rel="noopener">כתובת תל דן</a></td><td>המאה ה-9 לפנה"ס</td><td>"בית דוד"</td><td>מוזיאון ישראל</td></tr>
+<tr><td><a href="${W}Siloam_inscription" target="_blank" rel="noopener">כתובת השילוח</a></td><td>המאה ה-8 לפנה"ס</td><td>נקבת חזקיהו</td><td>איסטנבול</td></tr>
+<tr><td><a href="${W}Merneptah_Stele" target="_blank" rel="noopener">מצבת מרנפתח</a></td><td>כ-1208 לפנה"ס</td><td>"ישראל"</td><td>קהיר</td></tr>
+<tr><td><a href="${W}Bubastite_Portal" target="_blank" rel="noopener">השער הבובסטי</a></td><td>כ-925 לפנה"ס</td><td>שישק (מל"א יד 25)</td><td>כרנך</td></tr>
+<tr><td><a href="${W}Amarna_letter_EA_288" target="_blank" rel="noopener">מכתב עבדי-חבה</a></td><td>המאה ה-14 לפנה"ס</td><td>ירושלים</td><td>ברלין</td></tr>
+<tr><td><a href="${W}Jehoiachin%27s_Rations_Tablets" target="_blank" rel="noopener">קצבאות יהויכין</a></td><td>כ-592 לפנה"ס</td><td>יהויכין (מל"ב כה 27)</td><td>ברלין</td></tr>
+<tr><td><a href="${W}Pilate_stone" target="_blank" rel="noopener">אבן פילטוס</a></td><td>26–36 לסה"נ</td><td>פילטוס</td><td>מוזיאון ישראל</td></tr>
+<tr><td><a href="${W}Caiaphas_ossuary" target="_blank" rel="noopener">גלוסקמת קיפא</a></td><td>המאה ה-1</td><td>קיפא</td><td>מוזיאון ישראל</td></tr>
+<tr><td><a href="${W}Delphi_Inscription" target="_blank" rel="noopener">כתובת גאליון</a></td><td>כ-52 לסה"נ</td><td>גאליון (מה"ש יח 12)</td><td>דלפי</td></tr>
+</tbody></table></div>
+<p>מגילות ים המלח במוזיאון ישראל. הקודקס הסינאיטי בספרייה הבריטית, 10 דקות הליכה – מומלץ ביום אחר.</p>
+<h3>רקע היסטורי</h3>
+<p><b>אשור ובבל:</b> שלמנאסר השלישי נלחם באחאב בקרקר (853) וקיבל מס מיהוא. סרגון השני השלים את חורבן שומרון (722/720). סנחריב החריב את לכיש ב-701 אך לא כבש את ירושלים. נבוכדנאצר הוביל את גלויות 597 ו-586.</p>
+<p><b>מצרים:</b> שלטה בכנען בתקופת עמארנה; מרנפתח מזכיר את "ישראל"; שישק פלש כ-925; נכה הרג את יאשיהו. יוסף ויציאת מצרים אינם מתועדים במקורות מצריים.</p>
+<p><b>פרס (539–332):</b> כורש מחזיר גולים; הבית השני נבנה תחת דריווש (515); עזרא ונחמיה תחת ארתחשסתא.</p>
+<p><b>העולם ההלניסטי (332–63):</b> תלמיים וסלווקים. גזירות אנטיוכוס הרביעי (167) הובילו למרד החשמונאים.</p>
+<p><b>רומא ויהודה:</b> פומפיוס (63 לפנה"ס), הורדוס, פילטוס, המרד הגדול והחורבן (66–70), מרד בר כוכבא (132–135). המטבעות בחדר 68 מספרים את כל הסיפור.</p>
+<p><b>הנצרות המוקדמת:</b> פאולוס באפסוס, תסלוניקי וקורינתוס. הינטון סנט מרי מראה את הנצרות בבריטניה של המאה ה-4.</p>
+<h3>פלייליסט לפני הביקור</h3>
+<div class="tbl"><table><thead><tr><th>#</th><th>חדר</th><th>פרק</th><th>דק'</th></tr></thead><tbody>
+${[['4','100 Objects #33 – Rosetta Stone',15],['10','100 Objects #21 – Lachish Reliefs',15],['10','עושים תנ"ך – מסע סנחריב: גירסת הבמאי',45],['10a','The Ancients – Ashurbanipal',52],['56','100 Objects #12 – Standard of Ur',15],['56','Tom Scott vs Irving Finkel (וידאו)',26],['55','100 Objects #16 – Flood Tablet',15],['55','Lex Fridman #487, מ-1:30:21','~20'],['52','100 Objects #26 – Oxus Chariot',15],['52','In Our Time – Cyrus the Great',51],['22','In Our Time – Judas Maccabeus',42],['49','100 Objects #44 – Hinton St Mary',15]].map((r,i)=>`<tr><td>${i+1}</td><td>${r[0]}</td><td dir="auto">${r[1]}</td><td>${r[2]}</td></tr>`).join('')}
+</tbody></table></div>
+<p>סה"כ כ-5 שעות ו-25 דקות. גרסה מקוצרת: רק פרקי 100 Objects (כשעה ו-45 דקות).</p>
+<h3>ספרים</h3>
+<ul><li dir="auto">T. C. Mitchell, The Bible in the British Museum</li><li dir="auto">Irving Finkel, The Ark Before Noah</li><li dir="auto">Irving Finkel (ed.), The Cyrus Cylinder</li></ul>
+<h3>הסתייגויות</h3>
+<ul><li>תוכנית החדרים כאן סכמטית ומבוססת על המפה הרשמית 03/2026. הסדר בתוך כל חדר משוער.</li><li>פריטים המסומנים ⚠ מבוססים על מקורות משניים.</li><li>הקשרים המקראיים לפי הדעה המחקרית המקובלת; חלקם (האיל בסבך ואברהם) קישורים פופולריים בלבד.</li><li>Digging for Truth ו-Biblical Archaeology Today בגישה אפולוגטית. "עושים תנ"ך" ו-In Our Time מייצגים את הקונצנזוס האקדמי.</li><li>קישורי התמלול הישנים של ה-BBC עלולים להפנות לדף אחר. אם לא נפתח, חפשו באתר ה-BBC: "episode transcript episode N".</li></ul>
+</div>`;
+
+/* ---------- boot ---------- */
+setRoute(routeKey);
+const nx0=nextStop(); if(nx0)setFloor(STOPS[nx0].floor);
+openFromHash();
+setInterval(()=>{renderClock();renderList()},60000);
+</script>
