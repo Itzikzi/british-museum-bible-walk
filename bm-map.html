@@ -207,6 +207,13 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 
 .tbl table{border-collapse:collapse;font-size:.86rem;min-width:520px;width:100%}
 .tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
 .tbl th{font-weight:800;color:var(--ink2)}
+.pref{display:flex;gap:12px;align-items:center;padding:14px;border-radius:var(--r-md);cursor:pointer}
+.pref .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pref small{color:var(--ink2);font-size:.85rem}
+.pref input{appearance:none;-webkit-appearance:none;flex:none;width:52px;height:32px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;transition:background .2s;margin:0}
+.pref input::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .2s}
+.pref input:checked{background:var(--ok)}
+.pref input:checked::after{transform:translateX(-20px)}
 .foot-note{font-size:.8rem;color:var(--ink3);text-align:center;padding:8px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -217,6 +224,9 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 
       <h1>המוזיאון הבריטי</h1>
       <div class="sub"><span>מסלול מקראי</span><span id="clock"></span></div>
     </div>
+    <button class="iconbtn glass" id="prefsBtn" aria-label="הגדרות">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+    </button>
     <button class="iconbtn glass" id="infoBtn" aria-label="מידע מעשי, רקע ופלייליסט">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.01"/></svg>
     </button>
@@ -487,6 +497,8 @@ const PLAN=[
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 let seen=new Set(LS.get('bm-seen',[]));
 let routeKey=LS.get('bm-route','full');
+let prefs=Object.assign({apple:false},LS.get('bm-prefs',{}));
+const isApple=([lb,u])=>/podcasts\.apple\.com/.test(u);
 let floor=0, openId=null, mapMode=LS.get('bm-mapmode','real');
 
 const $=s=>document.querySelector(s);
@@ -635,7 +647,7 @@ function podHtml(p){
     ${p.cue?`<div class="bible"><b>להקשיב למשפט:</b> ${esc(p.cue)}</div>`:''}
     <p>${esc(p.sum)}</p>
     ${p.more&&p.more.length?`<details class="more"><summary>תקציר מורחב</summary><ul>${p.more.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${p.src?`<div class="src">מקור התקציר: ${esc(p.src)}</div>`:''}</details>`:''}
-    <div class="links">${p.listen.map(([lb,u])=>{const yt=p.ytT&&/youtube\.com\/watch/.test(u);return `<a class="lk pri" href="${esc(withYt(u,p))}" target="_blank" rel="noopener">${I.play}<span dir="auto">${esc(lb)}${yt?` · מ-${fmt(p.ytT)}`:''}</span></a>`}).join('')}${sp?`<a class="lk pri" href="${esc(sp)}" target="_blank" rel="noopener">${I.play}<span>Spotify${p.t?` · מ-${fmt(p.t)}`:''}</span></a>`:''}${p.tr?`<a class="lk" href="${esc(p.tr[1])}" target="_blank" rel="noopener">${I.doc}תמלול ${esc(p.tr[0])}</a>`:''}${heTr?`<a class="lk" href="${esc(heTr)}" target="_blank" rel="noopener">${I.doc}תמלול בעברית</a>`:''}</div>
+    <div class="links">${p.listen.filter(l=>prefs.apple||!isApple(l)).map(([lb,u])=>{const yt=p.ytT&&/youtube\.com\/watch/.test(u);return `<a class="lk pri" href="${esc(withYt(u,p))}" target="_blank" rel="noopener">${I.play}<span dir="auto">${esc(lb)}${yt?` · מ-${fmt(p.ytT)}`:''}</span></a>`}).join('')}${sp?`<a class="lk pri" href="${esc(sp)}" target="_blank" rel="noopener">${I.play}<span>Spotify${p.t?` · מ-${fmt(p.t)}`:''}</span></a>`:''}${p.tr?`<a class="lk" href="${esc(p.tr[1])}" target="_blank" rel="noopener">${I.doc}תמלול ${esc(p.tr[0])}</a>`:''}${heTr?`<a class="lk" href="${esc(heTr)}" target="_blank" rel="noopener">${I.doc}תמלול בעברית</a>`:''}</div>
   </div>`;
 }
 
@@ -653,6 +665,14 @@ function renderSheet(id){
     <button class="nx" ${next?`data-go="${next}"`:'disabled'}><span>הבא ←</span><small>${next?esc(STOPS[next].title+' · '+STOPS[next].name):'סוף המסלול'}</small></button>`;
 }
 
+function renderPrefs(){
+  $('#shNum').innerHTML='';
+  $('#shTitle').textContent='הגדרות';
+  $('#shMeta').innerHTML='<span>נשמר בטלפון הזה</span>';
+  $('#shBody').innerHTML=`<label class="pref glass"><span class="t"><b>קישורי Apple Podcasts</b><small>הצגת כפתורי Apple ליד כל פרק. באנדרואיד הם לא קופצים לדקה הנכונה.</small></span><input type="checkbox" id="pref-apple" role="switch" ${prefs.apple?'checked':''}></label>`;
+  $('#shFoot').innerHTML=`<button class="nx" data-close="1"><span>סיום</span></button>`;
+  $('#pref-apple').onchange=e=>{prefs.apple=e.target.checked;LS.set('bm-prefs',prefs)};
+}
 function renderInfo(){
   $('#shNum').innerHTML='';
   $('#shTitle').textContent='מידע מעשי, רקע ופלייליסט';
@@ -665,9 +685,9 @@ function renderInfo(){
 function openFromHash(){
   const h=location.hash.slice(1);
   const sheet=$('#sheet');
-  if(h==='info'||STOPS[h]){
+  if(h==='info'||h==='prefs'||STOPS[h]){
     openId=h;
-    if(h==='info')renderInfo();else{renderSheet(h);if(STOPS[h].floor!==floor)setFloor(STOPS[h].floor)}
+    if(h==='info')renderInfo();else if(h==='prefs')renderPrefs();else{renderSheet(h);if(STOPS[h].floor!==floor)setFloor(STOPS[h].floor)}
     sheet.hidden=false;requestAnimationFrame(()=>{sheet.classList.add('on');$('#scrim').classList.add('on')});
     $('#shBody').scrollTop=0;
     $('#shClose').focus({preventScroll:true});
@@ -682,7 +702,7 @@ const close=()=>{if(location.hash){history.length>1&&openId?location.hash='':loc
 function setMode(m){mapMode=m;LS.set('bm-mapmode',m);$('#mm-real').setAttribute('aria-pressed',m==='real');$('#mm-plan').setAttribute('aria-pressed',m==='plan');$('#mapCredit').hidden=m!=='real';renderMap()}
 function setFloor(f){floor=f;$('#fl-0').setAttribute('aria-pressed',f===0);$('#fl-1').setAttribute('aria-pressed',f===1);renderMap()}
 function setRoute(k){routeKey=k;LS.set('bm-route',k);$('#rt-full').setAttribute('aria-pressed',k==='full');$('#rt-short').setAttribute('aria-pressed',k==='short');renderAll()}
-function renderAll(){renderClock();renderMap();renderList();if(openId&&openId!=='info')renderSheet(openId)}
+function renderAll(){renderClock();renderMap();renderList();if(STOPS[openId])renderSheet(openId)}
 
 document.addEventListener('click',e=>{
   const c=e.target.closest('[data-item]');
@@ -692,7 +712,7 @@ document.addEventListener('click',e=>{
   if(e.target.closest('[data-close]')){close();return}
   const s=e.target.closest('[data-stop]'); if(s&&s.dataset.stop){go(s.dataset.stop);return}
 });
-$('#scrim').onclick=close; $('#shClose').onclick=close; $('#infoBtn').onclick=()=>go('info');
+$('#scrim').onclick=close; $('#shClose').onclick=close; $('#infoBtn').onclick=()=>go('info'); $('#prefsBtn').onclick=()=>go('prefs');
 $('#mm-real').onclick=()=>setMode('real'); $('#mm-plan').onclick=()=>setMode('plan'); setMode(mapMode);
 $('#fl-0').onclick=()=>setFloor(0); $('#fl-1').onclick=()=>setFloor(1);
 $('#rt-full').onclick=()=>setRoute('full'); $('#rt-short').onclick=()=>setRoute('short');
