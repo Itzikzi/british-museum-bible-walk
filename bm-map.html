@@ -771,7 +771,7 @@ function openFromHash(){
   if(h==='info'||h==='prefs'||STOPS[h]){
     openId=h;
     if(h==='info')renderInfo();else if(h==='prefs')renderPrefs();else{renderSheet(h);if(STOPS[h].floor!==floor)setFloor(STOPS[h].floor)}
-    sheet.hidden=false;requestAnimationFrame(()=>{sheet.classList.add('on');$('#scrim').classList.add('on')});
+    sheet.hidden=false;requestAnimationFrame(()=>{if(openId!==h)return;sheet.classList.add('on');$('#scrim').classList.add('on')});
     $('#shBody').scrollTop=0;
     $('#shClose').focus({preventScroll:true});
   }else if(openId){
